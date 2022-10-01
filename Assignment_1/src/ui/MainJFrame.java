@@ -4,6 +4,8 @@
  */
 package ui;
 
+import model.EmployeeProfileHistory;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,8 +15,16 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    
+    
+    EmployeeProfileHistory history;
+    
+    
     public MainJFrame() {
         initComponents();
+        
+        history = new EmployeeProfileHistory();
+        
     }
 
     /**
@@ -103,10 +113,15 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnCreate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreate1ActionPerformed
         // TODO add your handling code here:
+        CreateJPanel createPanel = new CreateJPanel();
+        SplitPanel.setRightComponent(createPanel);
+        
     }//GEN-LAST:event_btnCreate1ActionPerformed
 
     /**

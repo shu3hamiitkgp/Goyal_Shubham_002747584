@@ -9,14 +9,13 @@ package model;
  * @author shubhamgoyal
  */
 import java.util.Date;
-
 public class EmployeeProfile {
     
     private String Name;
     private String EmployeeID;
     private int Age;
     private String Gender;
-    Date StartDate = new Date();
+    private String  StartDate;
     private String Level;
     private String TeamInfo;
     private String PositionTitle;
@@ -48,12 +47,12 @@ public class EmployeeProfile {
         this.Age = Age;
     }
 
-    public privat getString() {
-        return String;
+    public String getGender() {
+        return Gender;
     }
 
-    public void setString(privat String) {
-        this.String = String;
+    public void setGender(String Gender) {
+        this.Gender = Gender;
     }
 
     public String getStartDate() {

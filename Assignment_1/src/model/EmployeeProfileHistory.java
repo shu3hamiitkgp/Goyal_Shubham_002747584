@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author shubhamgoyal
@@ -17,12 +19,13 @@ public class EmployeeProfileHistory {
         this.history= new ArrayList<EmployeeProfile>();
     }
 
-    public <any> getHistory() {
+    public ArrayList<EmployeeProfile> getHistory() {
         return history;
     }
 
-    public void setHistory(<any> history) {
+    public void setHistory(ArrayList<EmployeeProfile> history) {
         this.history = history;
     }
+    
     
 }
