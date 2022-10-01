@@ -27,5 +27,12 @@ public class EmployeeProfileHistory {
         this.history = history;
     }
     
+    public EmployeeProfile addNewProfile(){
+        
+        EmployeeProfile newProfile = new EmployeeProfile();
+        history.add(newProfile);
+        return newProfile;
+        
+    }
     
 }

@@ -119,7 +119,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnCreate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreate1ActionPerformed
         // TODO add your handling code here:
-        CreateJPanel createPanel = new CreateJPanel();
+        CreateJPanel createPanel = new CreateJPanel(history);
         SplitPanel.setRightComponent(createPanel);
         
     }//GEN-LAST:event_btnCreate1ActionPerformed

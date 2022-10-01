@@ -4,6 +4,12 @@
  */
 package ui;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import model.EmployeeProfile;
+import model.EmployeeProfileHistory;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,8 +19,12 @@ public class CreateJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateJPanel
      */
-    public CreateJPanel() {
+    
+    EmployeeProfileHistory history;
+    
+    public CreateJPanel(EmployeeProfileHistory history) {
         initComponents();
+        this.history=history;
     }
 
     /**
@@ -79,6 +89,11 @@ public class CreateJPanel extends javax.swing.JPanel {
         lblPhotoPath.setText("Photo:");
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnUpload.setText("Upload");
 
@@ -185,6 +200,50 @@ public class CreateJPanel extends javax.swing.JPanel {
                 .addContainerGap(227, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        String Name = txtName.getText();
+        String EmployeeID = txtEmployeeID.getText();
+        int Age = Integer.parseInt(txtAge.getText());
+        String Gender = txtGender.getText();
+        String StartDate = txtStartDate.getText();
+        String Level = txtLevel.getText();
+        String TeamInfo = txtTeamInfo.getText();
+        String PositionTitle = txtPositionTitle.getText();
+        String CellPhoneNumber = txtCellPhoneNumber.getText();
+        String EmailAddress = txtEmailAddress.getText();
+        String PhotoPath = txtPhotoPath.getText();
+        
+        EmployeeProfile ep= history.addNewProfile();
+        
+        ep.setName(Name);
+        ep.setAge(Age);
+        ep.setEmployeeID(EmployeeID);
+        ep.setGender(Gender);
+        ep.setStartDate(StartDate);
+        ep.setLevel(Level);
+        ep.setTeamInfo(TeamInfo);
+        ep.setPositionTitle(PositionTitle);
+        ep.setCellPhoneNumber(CellPhoneNumber);
+        ep.setEmailAddress(EmailAddress);
+        ep.setPhotoPath(PhotoPath);
+        
+        JOptionPane.showMessageDialog(this, "New Employee Info added.");
+        
+        txtName.setText("");
+        txtEmployeeID.setText("");
+        txtAge.setText("");
+        txtGender.setText("");
+        txtStartDate.setText("");
+        txtLevel.setText("");
+        txtTeamInfo.setText("");
+        txtPositionTitle.setText("");
+        txtCellPhoneNumber.setText("");
+        txtEmailAddress.setText("");
+        txtPhotoPath.setText("");
+        
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
