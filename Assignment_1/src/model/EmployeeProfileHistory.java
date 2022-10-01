@@ -35,4 +35,8 @@ public class EmployeeProfileHistory {
         
     }
     
+    public void deleteProfile(EmployeeProfile ep){
+        history.remove(ep);
+    }
+    
 }

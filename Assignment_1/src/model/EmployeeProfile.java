@@ -111,7 +111,10 @@ public class EmployeeProfile {
         this.PhotoPath = PhotoPath;
     }
 
-    
+    @Override
+    public String toString(){
+        return Name;
+    }
     
     
 }
