@@ -8,13 +8,15 @@ package model;
  *
  * @author shubhamgoyal
  */
+import java.util.Date;
+
 public class EmployeeProfile {
     
     private String Name;
     private String EmployeeID;
     private int Age;
-    privat String Gender;
-    private String StartDate;
+    private String Gender;
+    Date StartDate = new Date();
     private String Level;
     private String TeamInfo;
     private String PositionTitle;
