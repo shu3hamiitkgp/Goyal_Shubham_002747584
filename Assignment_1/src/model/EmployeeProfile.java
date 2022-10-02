@@ -8,20 +8,22 @@ package model;
  *
  * @author shubhamgoyal
  */
+import java.awt.Image;
 import java.util.Date;
 public class EmployeeProfile {
     
     private String Name;
-    private String EmployeeID;
+    private Long EmployeeID;
     private int Age;
     private String Gender;
-    private String  StartDate;
-    private String Level;
+    private Date StartDate;
+    private int Level;
     private String TeamInfo;
     private String PositionTitle;
-    private String CellPhoneNumber;
+    private Long CellPhoneNumber;
     private String EmailAddress;
     private String PhotoPath;
+    //private Image Photo;
 
     public String getName() {
         return Name;
@@ -31,11 +33,11 @@ public class EmployeeProfile {
         this.Name = Name;
     }
 
-    public String getEmployeeID() {
+    public Long getEmployeeID() {
         return EmployeeID;
     }
 
-    public void setEmployeeID(String EmployeeID) {
+    public void setEmployeeID(Long EmployeeID) {
         this.EmployeeID = EmployeeID;
     }
 
@@ -55,19 +57,19 @@ public class EmployeeProfile {
         this.Gender = Gender;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return StartDate;
     }
 
-    public void setStartDate(String StartDate) {
+    public void setStartDate(Date StartDate) {
         this.StartDate = StartDate;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return Level;
     }
 
-    public void setLevel(String Level) {
+    public void setLevel(int Level) {
         this.Level = Level;
     }
 
@@ -87,11 +89,11 @@ public class EmployeeProfile {
         this.PositionTitle = PositionTitle;
     }
 
-    public String getCellPhoneNumber() {
+    public Long getCellPhoneNumber() {
         return CellPhoneNumber;
     }
 
-    public void setCellPhoneNumber(String CellPhoneNumber) {
+    public void setCellPhoneNumber(Long CellPhoneNumber) {
         this.CellPhoneNumber = CellPhoneNumber;
     }
 
@@ -110,11 +112,18 @@ public class EmployeeProfile {
     public void setPhotoPath(String PhotoPath) {
         this.PhotoPath = PhotoPath;
     }
+    
+    //public Image getPhoto() {
+    //    return Photo;
+    //}
+
+    //public void setPhoto(Image Photo) {
+    //    this.Photo = Photo;
+    //}
 
     @Override
     public String toString(){
         return Name;
-    }
-    
+    }    
     
 }
