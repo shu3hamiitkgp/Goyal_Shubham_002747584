@@ -291,24 +291,54 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtEmailAddress">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Standard xyz@mail.com format"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCellPhoneNumber">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Enter 10-digit numbers only"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtEmployeeID">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Only numbers accepted"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPositionTitle">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Only Alphabets and Spaces"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTeamInfo">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Only Alphabets and Spaces"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtStartDate">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy Format Only"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtLevel">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Only numbers accepted"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtAge">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Only numbers accepted"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPhotoPath">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Upload picture"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtName">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Only Alphabets and Spaces"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblName">
       <Properties>

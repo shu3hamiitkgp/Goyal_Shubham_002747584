@@ -127,6 +127,26 @@ public class ViewJPanel extends javax.swing.JPanel {
 
         lblPhotoPath.setText("Photo:");
 
+        txtEmailAddress.setToolTipText("Standard xyz@mail.com format");
+
+        txtCellPhoneNumber.setToolTipText("Enter 10-digit numbers only");
+
+        txtEmployeeID.setToolTipText("Only numbers accepted");
+
+        txtPositionTitle.setToolTipText("Only Alphabets and Spaces");
+
+        txtTeamInfo.setToolTipText("Only Alphabets and Spaces");
+
+        txtStartDate.setToolTipText("dd/MM/yyyy Format Only");
+
+        txtLevel.setToolTipText("Only numbers accepted");
+
+        txtAge.setToolTipText("Only numbers accepted");
+
+        txtPhotoPath.setToolTipText("Upload picture");
+
+        txtName.setToolTipText("Only Alphabets and Spaces");
+
         lblName.setText("Name:");
 
         lblEmployeeID.setText("Employee ID:");
