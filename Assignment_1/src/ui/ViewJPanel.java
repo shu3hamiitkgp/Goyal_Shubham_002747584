@@ -6,12 +6,16 @@ package ui;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.EmployeeProfile;
 import model.EmployeeProfileHistory;
+import ui.CreateJPanel;
 
 /**
  *
@@ -122,26 +126,6 @@ public class ViewJPanel extends javax.swing.JPanel {
 
         lblPhotoPath.setText("Photo:");
 
-        txtEmailAddress.setEditable(false);
-
-        txtCellPhoneNumber.setEditable(false);
-
-        txtEmployeeID.setEditable(false);
-
-        txtPositionTitle.setEditable(false);
-
-        txtTeamInfo.setEditable(false);
-
-        txtStartDate.setEditable(false);
-
-        txtLevel.setEditable(false);
-
-        txtAge.setEditable(false);
-
-        txtPhotoPath.setEditable(false);
-
-        txtName.setEditable(false);
-
         lblName.setText("Name:");
 
         lblEmployeeID.setText("Employee ID:");
@@ -161,24 +145,31 @@ public class ViewJPanel extends javax.swing.JPanel {
         lblCellPhoneNumber.setText("Cell Phone:");
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         lblPhoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPhoto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblPhoto.setVerifyInputWhenFocusTarget(false);
 
         btnUpload.setText("Upload");
+        btnUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadActionPerformed(evt);
+            }
+        });
 
         rbtnGroup.add(rbtnMale);
         rbtnMale.setText("M");
-        rbtnMale.setEnabled(false);
 
         rbtnGroup.add(rbtnFemale);
         rbtnFemale.setText("F");
-        rbtnFemale.setEnabled(false);
 
         rbtnGroup.add(rbtnOther);
         rbtnOther.setText("Other");
-        rbtnOther.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -247,14 +238,13 @@ public class ViewJPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(btnView)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnDelete))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(btnUpdate)
-                                        .addGap(86, 86, 86)))))))
+                                .addComponent(btnUpdate)
+                                .addGap(86, 86, 86))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnView)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)))
                 .addContainerGap())
         );
 
@@ -377,13 +367,248 @@ public class ViewJPanel extends javax.swing.JPanel {
             rbtnOther.setSelected(true);
         }
         
-        ImageIcon photo = new ImageIcon(selectedProfile.getPhotoPath());
-//        lblPhoto.setSize(134, 119);
-//        System.out.println(photoLabel.getHeight());
-        Image photoResized = photo.getImage().getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(),4);
-        lblPhoto.setIcon(new ImageIcon(photoResized));  
+        setPhoto();
         
     }//GEN-LAST:event_btnViewActionPerformed
+
+    public void setValuesToHistory(){
+        
+        int selectedRowIndex = tblEmployeeProfile.getSelectedRow();
+        
+        if(selectedRowIndex<0){
+            
+            JOptionPane.showMessageDialog(this,"Please select a row to delete.");
+            return;
+        }
+        
+        DefaultTableModel model=(DefaultTableModel) tblEmployeeProfile.getModel();
+        EmployeeProfile selectedProfile = (EmployeeProfile) model.getValueAt(selectedRowIndex,0);
+            
+        
+        selectedProfile.setName(txtName.getText());
+        selectedProfile.setAge(Integer.parseInt(txtAge.getText()));
+        selectedProfile.setEmployeeID(Long.valueOf(txtEmployeeID.getText()));
+//        ep.setGender(txtGender.getText());
+        selectedProfile.setStartDate(getDateFromString(txtStartDate.getText()));
+        selectedProfile.setLevel(Integer.parseInt(txtLevel.getText()));
+        selectedProfile.setTeamInfo(txtTeamInfo.getText());
+        selectedProfile.setPositionTitle(txtPositionTitle.getText());
+        selectedProfile.setCellPhoneNumber(Long.valueOf(txtCellPhoneNumber.getText()));
+        selectedProfile.setEmailAddress(txtEmailAddress.getText());
+        selectedProfile.setPhotoPath(txtPhotoPath.getText());
+        
+        if(rbtnMale.isSelected()){
+            selectedProfile.setGender(rbtnMale.getText());
+        }else if(rbtnFemale.isSelected()){
+            selectedProfile.setGender(rbtnFemale.getText());
+        }else if(rbtnOther.isSelected()){
+            selectedProfile.setGender(rbtnOther.getText());
+        }
+        
+    }
+    
+    public Date getDateFromString(String StartDate) {
+        
+        Date date = null;
+        try {
+           date = new SimpleDateFormat("dd/MM/yyyy").parse(StartDate);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Not able to Parse date String");
+        }
+        return date;
+    }
+    
+    public boolean isDataValid(){
+        
+        System.out.println("Name Validation : " + isNameValid());
+        System.out.println("Age Validation : " + isAgeValid());
+        System.out.println("EmployeeID Validation : " + isEmployeeIDValid());
+//        System.out.println("Gender Validation : " + isGenderValid());
+        System.out.println("StartDate Validation : " + isStartDateValid());
+        System.out.println("Level Validation : " + isLevelValid());
+        System.out.println("TeamInfo Validation : " + isTeamInfoValid());
+        System.out.println("PositionTitle Validation : " + isPositionTitleValid());
+        System.out.println("CellPhoneNumber Validation : " + isCellPhoneNumberValid());
+        System.out.println("Email Validation : " + isEmailValid());
+        System.out.println("PhotoPath Validation : " + isPhotoPathValid());
+        
+        if(isNameValid() && isAgeValid() && isEmployeeIDValid() && 
+                isStartDateValid() && isLevelValid() && isTeamInfoValid() && isPositionTitleValid() &&
+                isCellPhoneNumberValid() && isEmailValid() && isPhotoPathValid()) {
+            
+            return true;
+        }
+        return false;
+        
+    }
+    
+    public boolean isNameValid() {
+        
+        if(txtName.getText().isBlank()) {
+            return false;
+        }
+        return txtName.getText().matches("^[a-zA-Z\\s]*$");
+    }
+
+    public boolean isAgeValid() {
+        
+        String Age = txtAge.getText();
+        Age = Age.replace(" ", "");
+        
+        try {
+            Integer.valueOf(Age);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isEmployeeIDValid() {
+        
+        String EmployeeID = txtEmployeeID.getText();
+        EmployeeID = EmployeeID.replace(" ", "");
+        
+        try {
+            Long.valueOf(EmployeeID);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isLevelValid() {
+        
+        String Level = txtLevel.getText();
+        Level = Level.replace(" ", "");
+        
+        try {
+            Integer.valueOf(Level);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isStartDateValid() {
+        
+        if(txtStartDate.getText().isBlank()){
+            return false;
+        }
+        
+        Date date = null;
+        try {
+           date = new SimpleDateFormat("dd/MM/yyyy").parse(txtStartDate.getText().replace(" ", ""));
+           System.err.println(date);
+           if(date.after(new Date())){
+               return false;
+           }
+           
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isTeamInfoValid() {
+        
+        if(txtTeamInfo.getText().isBlank()) {
+            return false;
+        }
+        return txtTeamInfo.getText().matches("^[a-zA-Z\\s]*$");
+
+    }
+
+    public boolean isPositionTitleValid() {
+        
+        
+        if(txtPositionTitle.getText().isBlank()) {
+            return false;
+        }
+        return txtPositionTitle.getText().matches("^[a-zA-Z\\s]*$");
+    }
+
+    public boolean isCellPhoneNumberValid() {
+        
+        String CellPhoneNumber = txtCellPhoneNumber.getText();
+        CellPhoneNumber = CellPhoneNumber.replace(" ", "");
+        if(CellPhoneNumber.length()!=10){
+            return false;
+        }
+        try {
+            Long.valueOf(CellPhoneNumber);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isEmailValid() {
+        
+        if(txtEmailAddress.getText().isBlank()){
+            return false;
+        }
+        String emailRegex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return txtEmailAddress.getText().matches(emailRegex);
+    }
+    
+    public boolean isPhotoPathValid() {
+        
+        File file = new File(txtPhotoPath.getText());
+        if(file.exists()){
+            return true;
+        }
+        return false;
+    }
+    
+    
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        
+        if(isDataValid()){
+            setValuesToHistory();
+            JOptionPane.showMessageDialog(this, "Employee Profile Updated Successfully");
+        }else{
+            JOptionPane.showMessageDialog(this, "Error Updating Employee Profile");
+        }  
+        
+        txtName.setText("");
+        txtEmployeeID.setText("");
+        txtAge.setText("");
+//        txtGender.setText("");
+        txtStartDate.setText("");
+        txtLevel.setText("");
+        txtTeamInfo.setText("");
+        txtPositionTitle.setText("");
+        txtCellPhoneNumber.setText("");
+        txtEmailAddress.setText("");
+        txtPhotoPath.setText("");
+        lblPhoto.setIcon(null);
+        rbtnGroup.clearSelection();
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    
+    private void setPhoto(){
+        
+        ImageIcon photo = new ImageIcon(txtPhotoPath.getText());
+        Image photoResized = photo.getImage().getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(),4);
+        lblPhoto.setIcon(new ImageIcon(photoResized));
+    }
+    
+    private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
+        // TODO add your handling code here:
+        
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("/"));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            txtPhotoPath.setText(selectedFile.getAbsolutePath());
+            setPhoto();
+        }
+    }//GEN-LAST:event_btnUploadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -441,4 +666,5 @@ public class ViewJPanel extends javax.swing.JPanel {
         }
         
     }
+
 }

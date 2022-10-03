@@ -247,7 +247,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void setValuesToHistory(){
+    public void setValuesToHistory(){
         
         
         EmployeeProfile ep= history.addNewProfile();
@@ -275,7 +275,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         
     }
       
-    private Date getDateFromString(String StartDate) {
+    public Date getDateFromString(String StartDate) {
         
         Date date = null;
         try {
@@ -287,7 +287,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         return date;
     }
     
-    private boolean isDataValid(){
+    public boolean isDataValid(){
         
         System.out.println("Name Validation : " + isNameValid());
         System.out.println("Age Validation : " + isAgeValid());
@@ -311,7 +311,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         
     }
     
-    private boolean isNameValid() {
+    public boolean isNameValid() {
         
         if(txtName.getText().isBlank()) {
             return false;
@@ -319,7 +319,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         return txtName.getText().matches("^[a-zA-Z\\s]*$");
     }
 
-    private boolean isAgeValid() {
+    public boolean isAgeValid() {
         
         String Age = txtAge.getText();
         Age = Age.replace(" ", "");
@@ -332,7 +332,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         }
     }
 
-    private boolean isEmployeeIDValid() {
+    public boolean isEmployeeIDValid() {
         
         String EmployeeID = txtEmployeeID.getText();
         EmployeeID = EmployeeID.replace(" ", "");
@@ -345,7 +345,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         }
     }
 
-    private boolean isLevelValid() {
+    public boolean isLevelValid() {
         
         String Level = txtLevel.getText();
         Level = Level.replace(" ", "");
@@ -358,7 +358,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         }
     }
 
-    private boolean isStartDateValid() {
+    public boolean isStartDateValid() {
         
         if(txtStartDate.getText().isBlank()){
             return false;
@@ -379,7 +379,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         return true;
     }
 
-    private boolean isTeamInfoValid() {
+    public boolean isTeamInfoValid() {
         
         if(txtTeamInfo.getText().isBlank()) {
             return false;
@@ -389,7 +389,7 @@ public class CreateJPanel extends javax.swing.JPanel {
                 
     }
 
-    private boolean isPositionTitleValid() {
+    public boolean isPositionTitleValid() {
         
         
         if(txtPositionTitle.getText().isBlank()) {
@@ -398,7 +398,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         return txtPositionTitle.getText().matches("^[a-zA-Z\\s]*$");
     }
 
-    private boolean isCellPhoneNumberValid() {
+    public boolean isCellPhoneNumberValid() {
         
         String CellPhoneNumber = txtCellPhoneNumber.getText();
         CellPhoneNumber = CellPhoneNumber.replace(" ", "");
@@ -413,7 +413,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         }
     }
 
-    private boolean isEmailValid() {
+    public boolean isEmailValid() {
         
         if(txtEmailAddress.getText().isBlank()){
             return false;
@@ -422,7 +422,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         return txtEmailAddress.getText().matches(emailRegex);
     }
     
-    private boolean isPhotoPathValid() {
+    public boolean isPhotoPathValid() {
         
         File file = new File(txtPhotoPath.getText());
         if(file.exists()){
