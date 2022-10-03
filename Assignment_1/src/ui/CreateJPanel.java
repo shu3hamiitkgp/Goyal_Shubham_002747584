@@ -104,6 +104,24 @@ public class CreateJPanel extends javax.swing.JPanel {
 
         lblPhotoPath.setText("Photo:");
 
+        txtEmailAddress.setToolTipText("Standard xyz@mail.com format");
+
+        txtCellPhoneNumber.setToolTipText("Enter 10-digit numbers only");
+
+        txtEmployeeID.setToolTipText("Only numbers accepted");
+
+        txtPositionTitle.setToolTipText("Only Alphabets and Spaces");
+
+        txtTeamInfo.setToolTipText("Only Alphabets and Spaces");
+
+        txtStartDate.setToolTipText("dd/MM/yyyy Format Only");
+
+        txtLevel.setToolTipText("Only numbers accepted");
+
+        txtAge.setToolTipText("Only numbers accepted");
+
+        txtName.setToolTipText("Only Alphabets and Spaces");
+
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +144,8 @@ public class CreateJPanel extends javax.swing.JPanel {
 
         rbtnGroup.add(rbtnOther);
         rbtnOther.setText("Other");
+
+        txtPhotoPath.setToolTipText("Upload picture");
 
         lblPhoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPhoto.setText("Image");

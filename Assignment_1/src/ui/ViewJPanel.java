@@ -82,6 +82,7 @@ public class ViewJPanel extends javax.swing.JPanel {
         rbtnMale = new javax.swing.JRadioButton();
         rbtnFemale = new javax.swing.JRadioButton();
         rbtnOther = new javax.swing.JRadioButton();
+        btnSearch = new javax.swing.JButton();
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -171,6 +172,13 @@ public class ViewJPanel extends javax.swing.JPanel {
         rbtnGroup.add(rbtnOther);
         rbtnOther.setText("Other");
 
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,7 +252,11 @@ public class ViewJPanel extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnView)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDelete)))
+                        .addComponent(btnDelete))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(btnSearch)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -262,7 +274,8 @@ public class ViewJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnView)
-                            .addComponent(btnDelete))
+                            .addComponent(btnDelete)
+                            .addComponent(btnSearch))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
@@ -610,9 +623,14 @@ public class ViewJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUploadActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpload;
     private javax.swing.JButton btnView;
