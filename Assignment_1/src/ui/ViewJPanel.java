@@ -531,7 +531,9 @@ public class ViewJPanel extends javax.swing.JPanel {
         
         Date date = null;
         try {
-           date = new SimpleDateFormat("dd/MM/yyyy").parse(txtStartDate.getText().replace(" ", ""));
+           SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyy");
+           format.setLenient(false);
+           date = format.parse(txtStartDate.getText().replace(" ", ""));
            System.err.println(date);
            if(date.after(new Date())){
                return false;
