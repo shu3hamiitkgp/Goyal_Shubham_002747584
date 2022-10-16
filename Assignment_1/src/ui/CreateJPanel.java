@@ -108,7 +108,7 @@ public class CreateJPanel extends javax.swing.JPanel {
 
         txtCellPhoneNumber.setToolTipText("Enter 10-digit numbers only");
 
-        txtEmployeeID.setToolTipText("Only numbers accepted");
+        txtEmployeeID.setToolTipText("Only numbers accepted (unique entry)");
 
         txtPositionTitle.setToolTipText("Only Alphabets and Spaces");
 
@@ -358,7 +358,10 @@ public class CreateJPanel extends javax.swing.JPanel {
         EmployeeID = EmployeeID.replace(" ", "");
         
         try {
-            Long.valueOf(EmployeeID);
+            Long.valueOf(EmployeeID) ;
+            if(history.searchEmployeeIDProfile(EmployeeID) != null){
+                throw new Exception("Already Exists");
+            };
             return true;
         } catch (Exception e) {
             return false;

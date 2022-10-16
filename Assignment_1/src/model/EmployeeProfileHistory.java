@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -39,4 +40,25 @@ public class EmployeeProfileHistory {
         history.remove(ep);
     }
     
+    public EmployeeProfile searchNameProfile(String name){
+        
+        for(EmployeeProfile ep : this.history){
+            if((ep.getName().toLowerCase()).contains(name.toLowerCase())){
+                return ep;
+            }
+        }
+        return null;
+    }
+    
+    public EmployeeProfile searchEmployeeIDProfile(String EmployeeID){
+        
+        for(EmployeeProfile ep : this.history){
+            if(String.valueOf(ep.getEmployeeID()).equals(EmployeeID)){
+                return ep;
+            }
+        }
+        return null;
+    }
+    
+   
 }
