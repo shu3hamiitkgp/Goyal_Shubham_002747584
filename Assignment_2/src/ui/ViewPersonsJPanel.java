@@ -8,12 +8,12 @@ package ui;
  *
  * @author shubhamgoyal
  */
-public class HospitalJPanel extends javax.swing.JPanel {
+public class ViewPersonsJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form HospitalJPanel
+     * Creates new form ViewPersonsJPanel
      */
-    public HospitalJPanel() {
+    public ViewPersonsJPanel() {
         initComponents();
     }
 
@@ -26,45 +26,45 @@ public class HospitalJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnDelete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblHospital = new javax.swing.JTable();
-        btnNext = new javax.swing.JButton();
+        tblPatients = new javax.swing.JTable();
+        btnUpdate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-
-        btnDelete.setText("Delete");
+        btnDelete = new javax.swing.JButton();
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Hospital Info Center");
+        jLabel4.setText("Patients Info Center");
 
-        tblHospital.setModel(new javax.swing.table.DefaultTableModel(
+        tblPatients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Created On", "Updated On", "Created By"
+                "Name", "Gender", "Age", "Created On", "Updated On", "Created By"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblHospital);
+        jScrollPane1.setViewportView(tblPatients);
 
-        btnNext.setText("Next");
+        btnUpdate.setText("Update");
 
         btnBack.setText("Back");
 
         btnAdd.setText("Add");
+
+        btnDelete.setText("Delete");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -82,7 +82,7 @@ public class HospitalJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBack))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -98,7 +98,7 @@ public class HospitalJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnNext)
+                    .addComponent(btnUpdate)
                     .addComponent(btnDelete)
                     .addComponent(btnAdd))
                 .addGap(159, 159, 159))
@@ -110,9 +110,9 @@ public class HospitalJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblHospital;
+    private javax.swing.JTable tblPatients;
     // End of variables declaration//GEN-END:variables
 }
