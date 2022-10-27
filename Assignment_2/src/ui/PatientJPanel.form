@@ -91,6 +91,11 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="txtPassword" min="-2" pref="142" max="-2" attributes="0"/>
                                           </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="lblPassword1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtHouseName" min="-2" pref="142" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
@@ -129,6 +134,10 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtAge" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAge" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Component id="lblPassword1" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
+                              <Component id="txtHouseName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -201,12 +210,7 @@
     <Component class="javax.swing.JComboBox" name="ComboBoxCity">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -221,12 +225,7 @@
     <Component class="javax.swing.JComboBox" name="ComboBoxCommunity">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -362,6 +361,13 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Other"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPassword1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="House Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtHouseName">
     </Component>
   </SubComponents>
 </Form>
