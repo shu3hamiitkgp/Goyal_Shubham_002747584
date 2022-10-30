@@ -10,22 +10,19 @@ import java.util.Date;
  *
  * @author shubhamgoyal
  */
-public class Patient extends ModifInfo {
+public class Patient extends Person {
     
     private EncounterHistory encounterHistory;
-    
-    private Person person;
-    
+       
     private City city;
     
     private Community community;
     
     private House houseName;
 
-    public Patient(EncounterHistory encounterHistory, Person person, City city,Community community,House houseName, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public Patient(String name, double age, Gender gender,String userID, String password, Date createdDate, EncounterHistory encounterHistory, City city,Community community,House houseName) {
+        super(name, age,  gender, userID,  password, "Patient", createdDate);
         this.encounterHistory = encounterHistory;
-        this.person=person;
         this.city=city;
         this.community=community;
         this.houseName=houseName;
@@ -37,14 +34,6 @@ public class Patient extends ModifInfo {
 
     public void setEncounterHistory(EncounterHistory encounterHistory) {
         this.encounterHistory = encounterHistory;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 
     public City getCity() {

@@ -4,6 +4,22 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.City;
+import model.Community;
+import model.HospitalDirectory;
+import model.House;
+import model.Patient;
+import model.Person;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,8 +29,45 @@ public class CommunityJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CommunityJPanel
      */
-    public CommunityJPanel() {
+    private JPanel displayJPanel;
+    private model.AppSystem system;
+    private City selectedCity;
+//    private HospitalDirectory hospDir;
+
+    
+    public CommunityJPanel(JPanel displayJPanel, model.AppSystem system,City selectedCity) {
         initComponents();
+        this.displayJPanel=displayJPanel;
+        this.system=system;
+        this.selectedCity=selectedCity;
+//        this.hospDir= new HospitalDirectory();
+        populateTable();
+        
+    }
+    
+    public void populateTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblCommunity.getModel();
+        model.setRowCount(0);
+        
+        if(selectedCity.getCommunities()!=null){
+            for(Community community:selectedCity.getCommunities()){
+                Object[] row = new Object[1]; 
+                row[0]=community;
+//                row[1]=formatDate(community.getCreatedDate());
+//                row[2]=formatDate(community.getLastUpdatedDate());
+//                row[3]=community.getCreatedBy();
+
+                model.addRow(row);
+            }
+        }
+    }
+    
+    private String formatDate(Date date){
+       
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
     }
 
     /**
@@ -26,17 +79,18 @@ public class CommunityJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAdd = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCommunity = new javax.swing.JTable();
-        btnNext = new javax.swing.JButton();
+        btnNextHospital = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-
-        btnAdd.setText("Add");
-
-        btnDelete.setText("Delete");
+        btnView = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        txtCommunityName = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
+        lblCommunityName = new javax.swing.JLabel();
+        btnNextHouse = new javax.swing.JButton();
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Community Info Center");
@@ -54,31 +108,98 @@ public class CommunityJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblCommunity);
 
-        btnNext.setText("Next");
+        btnNextHospital.setText("Next - Hospitals");
+        btnNextHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextHospitalActionPerformed(evt);
+            }
+        });
 
-        btnBack.setText("Back");
+        btnBack.setText("<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
+
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        lblCommunityName.setText("Community Name:");
+
+        btnNextHouse.setText("Next - Houses");
+        btnNextHouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextHouseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBack))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(234, 234, 234))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblCommunityName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnUpdate)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAdd)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnView)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDelete))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(125, 125, 125))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnNextHospital)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNextHouse)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,24 +208,201 @@ public class CommunityJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnNext)
+                    .addComponent(btnAdd)
                     .addComponent(btnDelete)
-                    .addComponent(btnAdd))
-                .addGap(159, 159, 159))
+                    .addComponent(btnView))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate)
+                    .addComponent(lblCommunityName))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNextHospital)
+                    .addComponent(btnNextHouse))
+                .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNextHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextHospitalActionPerformed
+        // TODO add your handling code here:
+        int selectedCommunity = tblCommunity.getSelectedRow();
+        if(selectedCommunity <0){
+            JOptionPane.showMessageDialog(this, "Please Select any Community to View the Hospitals");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblCommunity.getModel();
+        Community community = (Community) model.getValueAt(selectedCommunity, 0);
+        
+        HospitalJPanel hospitalJPanel = new HospitalJPanel(displayJPanel,system,community);
+        displayJPanel.add("HospitalInformation", hospitalJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+        
+    }//GEN-LAST:event_btnNextHospitalActionPerformed
+
+    
+    
+    
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        Component[] componentArray = displayJPanel.getComponents();
+        Component component = componentArray[componentArray.length-1];
+        CityJPanel cityJPanel = (CityJPanel) component;
+//        cityJPanel.initializeCities();
+        CardLayout cardLayout =  (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        int selectedCommunity = tblCommunity.getSelectedRow();
+        if(selectedCommunity < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a Community to update");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblCommunity.getModel();
+        Community community = (Community) model.getValueAt(selectedCommunity, 0);
+
+        txtCommunityName.setText(community.getCommunityName());
+        //        viewCityJPanel viCityJPanel = new viewCityJPanel(displayJPanel,system,city);
+        //        displayJPanel.add("ViewCityPanel", viCityJPanel);
+        //        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        //        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        AddCommunityJPanel addCommunityJPanel = new AddCommunityJPanel(displayJPanel,system ,selectedCity);
+        displayJPanel.add("AddCommunityScreen", addCommunityJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+         int selectedRow = tblCommunity.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please Select any Community to View the Houses");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) tblCommunity.getModel();
+        Community community = (Community) model.getValueAt(selectedRow, 0);
+        
+        List<Person> patientsToRemove = new ArrayList<>();
+        List<House> houses = community.getHouses();
+        if(houses!=null){
+            for(House house:houses) {
+                patientsToRemove.addAll(house.getPatDir().getPatients());
+            }
+        }
+//        List<Patient> patientsToRemove = new ArrayList<>();
+//        for(Person person:personsToRemove) {
+//            patientsToRemove.add(person.getPatient());
+//        }
+        
+//        system.getPersonDirectory().getPersons().removeAll(personsToRemove);
+//        system.getPersonDirectory().setLastUpdatedDate(new Date());
+        system.getPatientDirectory().getPatients().removeAll(patientsToRemove);
+//        system.getPatientDirectory().setLastUpdatedDate(new Date());
+        
+        selectedCity.getCommunities().remove(community);
+//        selectedCity.setLastUpdatedDate(new Date());
+        
+        JOptionPane.showMessageDialog(this, "Successfully deleted the Community");
+        populateTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        String communitySelected = (String) txtCommunityName.getText();
+        //        if(city.getCityName().name().equalsIgnoreCase(citySelected)){
+            //            return;
+            //        }
+
+//        List<Community> communities = system.getCommunity();
+//        for(City citys:cities) {
+//            if(citys.getCityName().name().equalsIgnoreCase(citySelected)){
+//                JOptionPane.showMessageDialog(this, "City already existed. Please select another");
+//                return;
+//            }
+//        }
+
+        //        city.setLastUpdatedDate(new Date());
+        //        JOptionPane.showMessageDialog(this, "Successfully Updated City");
+
+        if(isCommunityNameValid()){
+            int selectedCommunity = tblCommunity.getSelectedRow();
+
+            DefaultTableModel model = (DefaultTableModel) tblCommunity.getModel();
+            Community community = (Community) model.getValueAt(selectedCommunity, 0);
+
+            community.setCommunityName(txtCommunityName.getText());
+            JOptionPane.showMessageDialog(this, "City Updated Successfully");
+        }else{
+            JOptionPane.showMessageDialog(this, "Error Updating City");
+        }
+
+        txtCommunityName.setText("");
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    public boolean isCommunityNameValid() {
+        
+        if(txtCommunityName.getText().isBlank()) {
+            return false;
+        }
+        return txtCommunityName.getText().matches("^[a-zA-Z\\s]*$");
+    }
+    
+    private void btnNextHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextHouseActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblCommunity.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please Select any Community to View the Houses");
+            return;
+        }
+        
+        showHousesInCommunity(selectedRow);
+        
+    }//GEN-LAST:event_btnNextHouseActionPerformed
+
+    private void showHousesInCommunity(int selectedRow) {
+        
+        DefaultTableModel model = (DefaultTableModel) tblCommunity.getModel();
+        Community community = (Community) model.getValueAt(selectedRow, 0);
+        navigateToHouses(community);
+    }
+    
+    private void navigateToHouses(Community community){
+        
+        HouseJPanel houseJPanel = new HouseJPanel(displayJPanel,system,community);
+        displayJPanel.add("HouseInformation", houseJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }
+    
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnNextHospital;
+    private javax.swing.JButton btnNextHouse;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnView;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCommunityName;
     private javax.swing.JTable tblCommunity;
+    private javax.swing.JTextField txtCommunityName;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,23 +10,33 @@ import java.util.Date;
  *
  * @author shubhamgoyal
  */
-public class Person extends ModifInfo {
+public class Person {
     
     private String name;
     
     private double age;
     
-    private String gender;
+    private Gender gender;
     
-    private String userId;
+    private String userID;
     
     private String password;
+    
+    private String role;
+    
+    private Date createdDate;
         
-    public Person(String name, double age, String gender,String userId, String password, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public Person() {
+        
+    }
+    public Person(String name, double age, Gender gender,String userID, String password,String role, Date createdDate) {
         this.age = age;
         this.name = name;
         this.gender = gender;
+        this.userID=userID;
+        this.password=password;
+        this.role=role;
+        this.createdDate=createdDate;
         
     }
 
@@ -46,20 +56,20 @@ public class Person extends ModifInfo {
         this.age = age;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserID() {
+        return userID;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userID = userID;
     }
 
     public String getPassword() {
@@ -69,8 +79,26 @@ public class Person extends ModifInfo {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
     
-    
-    
+    @Override
+    public String toString() {
+        return name;
+    }
     
 }

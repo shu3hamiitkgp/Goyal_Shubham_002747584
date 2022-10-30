@@ -10,34 +10,23 @@ import java.util.Date;
  *
  * @author shubhamgoyal
  */
-public class Doctor extends ModifInfo {
-    
-    private Person person;
-    
+public class Doctor extends Person {
+        
     private City city;
     
     private Community community;
     
     private Hospital hospital;
 
-    public Doctor(Person person, City city,Community community,Hospital hospital, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
-       
-        this.person=person;
+    public Doctor(String name, double age, Gender gender,String userID, String password, Date createdDate, City city,Community community,Hospital hospital) {
+        super(name, age,  gender, userID,  password, "Doctor", createdDate);
+        
         this.city=city;
         this.community=community;
         this.hospital=hospital;
         
     }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
+    
     public City getCity() {
         return city;
     }

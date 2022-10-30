@@ -4,6 +4,15 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.Community;
+import model.Hospital;
+import model.House;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,8 +22,18 @@ public class AddHospitalJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddHospitalJPanel
      */
-    public AddHospitalJPanel() {
+    
+    private JPanel displayJPanel;
+    private model.AppSystem system;
+    private Community community;
+//    private model.HospitalDirectory hospDir;
+    
+    public AddHospitalJPanel(JPanel displayJPanel, model.AppSystem system, Community community) {
         initComponents();
+        this.displayJPanel=displayJPanel;
+        this.system=system;
+        this.community=community;
+//        this.hospDir=hospDir;
     }
 
     /**
@@ -38,6 +57,11 @@ public class AddHospitalJPanel extends javax.swing.JPanel {
         jLabel2.setText("Add Hospital details below:");
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +119,28 @@ public class AddHospitalJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        displayJPanel.remove(this);
+        Component[] componentArray = displayJPanel.getComponents();
+        Component component = componentArray[componentArray.length-1];
+        HospitalJPanel hospitalJPanel = (HospitalJPanel) component;
+        hospitalJPanel.populateHospitals();
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        if(txtHospitalName.getText().matches("^[a-zA-Z ]+$")){
+            Hospital hospital = new Hospital(txtHospitalName.getText());
+            
+            community.getHospDir().getHospitals().add(hospital);
+            
+            JOptionPane.showMessageDialog(this, "Successfully Saved");
+            txtHospitalName.setText("");
+        }else{
+            JOptionPane.showMessageDialog(this, "Not Saved. Please check DataType");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

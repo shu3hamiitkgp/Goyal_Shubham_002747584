@@ -16,46 +16,50 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" pref="328" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnCreate" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="btnCreate" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" pref="328" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblRePassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblPassword" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblUserID" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Component id="lblRePassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPassword" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblUserID" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="lblRole" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtUserID" alignment="0" pref="173" max="32767" attributes="0"/>
+                                      <Component id="txtUserID" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtPword" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtRePword" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="ComboBoxRole" min="-2" pref="173" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="lblGender" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblAge" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblGender" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblAge" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Component id="lblName" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtAge" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtName" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtAge" max="32767" attributes="0"/>
+                                      <Component id="txtName" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
                                           <Component id="ComboBoxGender" min="-2" pref="173" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
@@ -63,20 +67,20 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnBack" min="-2" pref="78" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="129" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnBack" min="-2" pref="78" max="-2" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -106,12 +110,17 @@
                   <Component id="txtRePword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblRePassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="ComboBoxRole" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblRole" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,75 +129,7 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Doctor Info Center"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="ComboBoxGender">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPword">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Basic Requirement - Atleast 6 digits, one of each upper case letter, lower case letter, digit and special character ($, *, # or &amp;)"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtAge">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="only numericals"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtRePword">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Should match password above"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblGender">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Gender:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblUserID">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="UserID:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblAge">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Age:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblPassword">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Password:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnBack">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Back"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblRePassword">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Re-enter Password :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Name:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtName">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Only Alphabets"/>
+        <Property name="text" type="java.lang.String" value="New User Registration"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCreate">
@@ -203,6 +144,94 @@
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="User ID should be in format xx@xx.xx"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPword">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Basic Requirement - Atleast 6 digits, one of each upper case letter, lower case letter, digit and special character ($, *, # or &amp;)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtRePword">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Should match password above"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUserID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="UserID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPassword">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Password:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblRePassword">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Re-enter Password :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="ComboBoxRole">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Community Admin"/>
+            <StringItem index="1" value="Hospital Admin"/>
+            <StringItem index="2" value="Patient"/>
+            <StringItem index="3" value="Doctor"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblRole">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Role :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtAge">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="only numericals"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblGender">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gender:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblAge">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Age:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtName">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Only Alphabets"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="ComboBoxGender">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnBack">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

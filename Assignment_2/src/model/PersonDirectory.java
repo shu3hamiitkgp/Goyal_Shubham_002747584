@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,13 +12,12 @@ import java.util.List;
  *
  * @author shubhamgoyal
  */
-public class PersonDirectory extends ModifInfo {
+public class PersonDirectory {
     
     private List<Person> persons;
-
-    public PersonDirectory(List<Person> persons, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
-        this.persons=persons;
+    
+    public PersonDirectory(){
+        this.persons= new ArrayList<Person>();
     }
 
     public List<Person> getPersons() {
@@ -26,6 +26,16 @@ public class PersonDirectory extends ModifInfo {
 
     public void setPersons(List<Person> persons) {
         this.persons = persons;
+    }
+    
+    public Person searchUserIDProfile(String UserID){
+        
+        for(Person pr : this.persons){
+            if(String.valueOf(pr.getUserID()).equals(UserID)){
+                return pr;
+            }
+        }
+        return null;
     }
     
 }

@@ -4,6 +4,16 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.AppSystem;
+import model.City;
+import model.Community;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,8 +23,16 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddCommunityJPanel
      */
-    public AddCommunityJPanel() {
+    
+    private JPanel displayJPanel;
+    private City city;
+    private AppSystem system;
+    
+    public AddCommunityJPanel(JPanel displayJPanel,model.AppSystem system, City city) {
         initComponents();
+        this.displayJPanel=displayJPanel;
+        this.city=city;
+        this.system = system;
     }
 
     /**
@@ -41,8 +59,18 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
         jLabel2.setText("Add Community details below:");
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -66,7 +94,7 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
                         .addGap(176, 176, 176)
                         .addComponent(lblCommunity)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -87,6 +115,36 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
                 .addContainerGap(195, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        String communityName = txtCommunityName.getText();
+        if(communityName.matches("^[a-zA-Z ]+$")){
+            Community community = new Community(communityName,null,null);
+            if(city.getCommunities()==null){
+                city.setCommunities(new ArrayList<>());
+                city.getCommunities().add(community);
+            }else{
+                city.getCommunities().add(community);
+            }
+            JOptionPane.showMessageDialog(this, "Successfully Saved");
+            txtCommunityName.setText("");
+        }else{
+            JOptionPane.showMessageDialog(this, "Not Saved. Please check the proper Type");
+        }
+        
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        Component[] componentArray = displayJPanel.getComponents();
+        Component component = componentArray[componentArray.length-1];
+        CommunityJPanel communityJPanel = (CommunityJPanel) component;
+        communityJPanel.populateTable();
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

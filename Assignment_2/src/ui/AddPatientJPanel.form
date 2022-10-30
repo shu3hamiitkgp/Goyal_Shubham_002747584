@@ -23,7 +23,7 @@
                       <Component id="jLabel4" min="-2" pref="328" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="btnCreate" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
                           <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
@@ -35,9 +35,9 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtUserID" alignment="0" pref="173" max="32767" attributes="0"/>
+                                      <Component id="txtUserID" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtPword" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtRePword" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtRePword" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -67,7 +67,7 @@
                       <Component id="btnBack" min="-2" pref="78" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="129" max="32767" attributes="0"/>
+              <EmptySpace pref="99" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,37 +120,7 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Doctor Info Center"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="ComboBoxGender">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPword">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Basic Requirement - Atleast 6 digits, one of each upper case letter, lower case letter, digit and special character ($, *, # or &amp;)"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtAge">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="only numericals"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtRePword">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Should match password above"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblGender">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Gender:"/>
+        <Property name="text" type="java.lang.String" value="Patient Info Center"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblUserID">
@@ -186,9 +156,34 @@
         <Property name="text" type="java.lang.String" value="Name:"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JComboBox" name="ComboBoxGender">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
     <Component class="javax.swing.JTextField" name="txtName">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Only Alphabets"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPword">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Basic Requirement - Atleast 6 digits, one of each upper case letter, lower case letter, digit and special character ($, *, # or &amp;)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtAge">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="only numericals"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtRePword">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Should match password above"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCreate">
@@ -198,6 +193,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblGender">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gender:"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUserID">
       <Properties>

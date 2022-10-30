@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,13 +12,12 @@ import java.util.List;
  *
  * @author shubhamgoyal
  */
-public class PatientDirectory extends ModifInfo {
+public class PatientDirectory {
     
     private List<Patient> patients;
-
-    public PatientDirectory(List<Patient> patients, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
-        this.patients=patients;
+    
+    public PatientDirectory(){
+        this.patients= new ArrayList<Patient>();
     }
 
     public List<Patient> getPatients() {
@@ -27,5 +27,6 @@ public class PatientDirectory extends ModifInfo {
     public void setPatients(List<Patient> patients) {
         this.patients = patients;
     }
+
     
 }

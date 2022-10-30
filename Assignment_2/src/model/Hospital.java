@@ -5,19 +5,23 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author shubhamgoyal
  */
-public class Hospital extends ModifInfo {
+public class Hospital {
     
     private String hospitalName;
     
+    private DoctorDirectory docDir;
+    
 
-    public Hospital(String hospitalName, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public Hospital(String hospitalName) {
+        
         this.hospitalName=hospitalName;
+        docDir=new DoctorDirectory();
     }
 
     public String getHospitalName() {
@@ -27,7 +31,18 @@ public class Hospital extends ModifInfo {
     public void setHospitalName(String hospitalName) {
         this.hospitalName = hospitalName;
     }
+
+    public DoctorDirectory getDocDir() {
+        return docDir;
+    }
+
+    public void setDocDir(DoctorDirectory docDir) {
+        this.docDir = docDir;
+    }
     
-    
+    @Override
+    public String toString() {
+        return hospitalName;
+    }
     
 }

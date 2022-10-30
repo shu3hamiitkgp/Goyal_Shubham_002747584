@@ -11,16 +11,28 @@ import java.util.List;
  *
  * @author shubhamgoyal
  */
-public class Community extends ModifInfo {
+public class Community {
     
     private String communityName;
     
     private List<House> houses;
-
-    public Community(String communityName, List<House> houses, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    
+    private HospitalDirectory hospDir;
+    
+//    private Date createdDate;
+//    public Community(){
+////        super();
+//        this.hospDir=new HospitalDirectory();
+//        this.houses=houses;
+//        this.communityName=communityName;
+//        
+//    }
+    
+    public Community(String communityName, List<House> houses,HospitalDirectory hospDir) {
+//        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
         this.communityName = communityName;
         this.houses = houses;
+        this.hospDir=new HospitalDirectory();
     }
 
     public String getCommunityName() {
@@ -38,5 +50,27 @@ public class Community extends ModifInfo {
     public void setHouses(List<House> houses) {
         this.houses = houses;
     }
+
+//    public Date getCreatedDate() {
+//        return createdDate;
+//    }
+//
+//    public void setCreatedDate(Date createdDate) {
+//        this.createdDate = createdDate;
+//    }
+
+    public HospitalDirectory getHospDir() {
+        return hospDir;
+    }
+
+    public void setHospDir(HospitalDirectory hospDir) {
+        this.hospDir = hospDir;
+    }
     
+    @Override
+    public String toString() {
+        return communityName;
+    }
+
+      
 }

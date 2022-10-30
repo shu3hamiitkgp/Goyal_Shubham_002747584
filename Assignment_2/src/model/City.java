@@ -4,30 +4,34 @@
  */
 package model;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
  * @author shubhamgoyal
  */
-public class City extends ModifInfo {
+public class City {
     
-    private CityName cityName;
+    private String cityName;
     
+//    private List<City> cities;
+     
     private List<Community> communities;
 
-    public City(CityName cityName, List<Community> communities, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public City(String cityName, List<Community> communities) {
         this.cityName=cityName;
         this.communities=communities;
     }
     
-    public CityName getCityName() {
+    public String getCityName() {
         return cityName;
     }
 
-    public void setCityName(CityName cityName) {
+    public void setCityName(String cityName) {
         this.cityName = cityName;
     }
     
@@ -39,4 +43,18 @@ public class City extends ModifInfo {
         this.communities = communities;
     }    
     
+//    public static List<String> getCitiesList(){
+       
+//        return Stream.of(City.values()).map(CityName::name).collect(Collectors.toList());
+//    }
+    
+//    public static String[] getCitiesArray() {
+        
+//        return Arrays.stream(CityName.values()).map(CityName::name).toArray(String[]::new);
+//    }
+    
+    @Override
+    public String toString() {
+        return cityName;
+    }
 }

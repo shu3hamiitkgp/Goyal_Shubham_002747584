@@ -11,16 +11,15 @@ import java.util.List;
  *
  * @author shubhamgoyal
  */
-public class House extends ModifInfo {
+public class House {
     
     private String houseName;
     
-//    private List<Person> persons;
+    private PatientDirectory patDir;
 
-    public House(String houseName, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public House(String houseName) {
         this.houseName=houseName;
-//        this.persons=persons;
+        this.patDir= new PatientDirectory();
     }
 
     public String getHouseName() {
@@ -30,12 +29,17 @@ public class House extends ModifInfo {
     public void setHouseName(String houseName) {
         this.houseName = houseName;
     }
+
+    public PatientDirectory getPatDir() {
+        return patDir;
+    }
+
+    public void setPatDir(PatientDirectory patDir) {
+        this.patDir = patDir;
+    }
     
-//    public List<Person> getPersons() {
-//        return persons;
-//    }
-//
-//    public void setPersons(List<Person> persons) {
-//        this.persons = persons;
-//    }
+    @Override
+    public String toString() {
+        return houseName;
+    }
 }

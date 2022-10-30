@@ -11,22 +11,31 @@ import java.util.List;
  *
  * @author shubhamgoyal
  */
-public class System extends ModifInfo {
+public class AppSystem extends Person {
     
-    private List<City> cities;
+    public List<City> cities;
     
-    private PersonDirectory personDirectory;
+    public PersonDirectory personDirectory;
     
-    private PatientDirectory patientDirectory;
+    public PatientDirectory patientDirectory;
     
-    private DoctorDirectory doctorDirectory;
+    public DoctorDirectory doctorDirectory;
 
-    public System(List<City> cities,PersonDirectory personDirectory, PatientDirectory patientDirectory,DoctorDirectory doctorDirectory, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    
+    
+    public AppSystem(){
+//        super();
+        this.personDirectory = new PersonDirectory();
+        this.patientDirectory=new PatientDirectory(); //add new
+        this.doctorDirectory= new DoctorDirectory(); 
+    }
+
+    public AppSystem(String name, double age, Gender gender, Date createdDate,List<City> cities,PersonDirectory personDirectory, PatientDirectory patientDirectory,DoctorDirectory doctorDirectory) {
+        super(name, age,  gender, "Admin",  "Admin", "System Admin", createdDate);
         this.cities= cities;
-        this.personDirectory=personDirectory;
-        this.patientDirectory=patientDirectory;
-        this.doctorDirectory=doctorDirectory;
+        this.personDirectory= new PersonDirectory();
+        this.patientDirectory=new PatientDirectory(); //add new
+        this.doctorDirectory= new DoctorDirectory(); //add new
         
     }
 

@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,13 +12,12 @@ import java.util.List;
  *
  * @author shubhamgoyal
  */
-public class EncounterHistory extends ModifInfo {
+public class EncounterHistory {
     
     private List<Encounter> encounters;
-
-    public EncounterHistory(List<Encounter> encounters,Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
-        this.encounters = encounters;
+    
+    public EncounterHistory(){
+        this.encounters= new ArrayList<Encounter>();
     }
 
     public List<Encounter> getEncounters() {

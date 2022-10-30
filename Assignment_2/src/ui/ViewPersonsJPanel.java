@@ -4,6 +4,18 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.City;
+import model.Community;
+import model.House;
+import model.Patient;
+import model.Person;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,9 +25,43 @@ public class ViewPersonsJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewPersonsJPanel
      */
-    public ViewPersonsJPanel() {
+    private JPanel displayJPanel;
+    private model.AppSystem system;
+    private House house;
+    
+    public ViewPersonsJPanel(JPanel displayJPanel,model.AppSystem system, House house) {
         initComponents();
+        this.displayJPanel=displayJPanel;
+        this.system=system;
+        this.house=house;
+        populateTable();
     }
+    
+    public void populateTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblPatients.getModel();
+        model.setRowCount(0);
+        if(house.getPatDir().getPatients()!=null){
+            for(Person person:house.getPatDir().getPatients()){
+                Object[] row = new Object[3];
+                row[0]=person;
+                row[1]=person.getAge();
+                row[2]=person.getGender().name();
+//                row[3]=formatDate(person.getCreatedDate());
+//                row[4]=formatDate(person.getLastUpdatedDate());
+//                row[5]=person.getCreatedBy();
+
+                model.addRow(row);
+            }
+        }
+    }
+    
+    private String formatDate(Date date){
+       
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,7 +75,7 @@ public class ViewPersonsJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPatients = new javax.swing.JTable();
-        btnUpdate = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -58,13 +104,33 @@ public class ViewPersonsJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblPatients);
 
-        btnUpdate.setText("Update");
+        btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
-        btnBack.setText("Back");
+        btnBack.setText("<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,15 +142,15 @@ public class ViewPersonsJPanel extends javax.swing.JPanel {
                 .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(204, 204, 204)
+                        .addComponent(btnAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBack))
+                        .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnNext))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -95,22 +161,84 @@ public class ViewPersonsJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNext)
                     .addComponent(btnBack)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnDelete)
-                    .addComponent(btnAdd))
-                .addGap(159, 159, 159))
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete))
+                .addGap(165, 165, 165))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblPatients.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please Select any Patient to View details");
+            return;
+        }
+
+        showPersonsDetails(selectedRow);
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void showPersonsDetails(int selectedRow) {
+        
+        DefaultTableModel model = (DefaultTableModel) tblPatients.getModel();
+        Patient patient = (Patient) model.getValueAt(selectedRow, 0);
+        navigateToDetails(patient);        
+        
+    }
+    
+    private void navigateToDetails(Patient patient){
+        
+        PatientJPanel patientJPanel = new PatientJPanel(displayJPanel,system,patient);
+        displayJPanel.add("PatientInformation", patientJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }
+    
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        CardLayout cardLayout =  (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        AddPatientJPanel addPatientJPanel = new AddPatientJPanel(displayJPanel, system, house);
+        displayJPanel.add("AddPatientPanel", addPatientJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+        
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = tblPatients.getSelectedRow();
+        if(selectedIndex < 0){
+            JOptionPane.showMessageDialog(this, "Please select a row to delete Patient");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblPatients.getModel();
+        Patient patient = (Patient) model.getValueAt(selectedIndex, 0);
+        house.getPatDir().getPatients().remove(patient);
+//        house.setLastUpdatedDate(new Date());
+        system.getPatientDirectory().getPatients().remove(patient);
+//        system.getPersonDirectory().setLastUpdatedDate(new Date());
+//        system.getPatientDirectory().getPatients().remove(person.getPatient());
+//        system.getPatientDirectory().setLastUpdatedDate(new Date());
+        populateTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnNext;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPatients;

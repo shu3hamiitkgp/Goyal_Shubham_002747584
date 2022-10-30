@@ -4,6 +4,19 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Community;
+import model.House;
+import model.Patient;
+import model.Person;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,10 +26,44 @@ public class HouseJPanel extends javax.swing.JPanel {
     /**
      * Creates new form HouseJPanel
      */
-    public HouseJPanel() {
+    private JPanel displayJPanel;
+    private model.AppSystem system;
+    private Community community;
+    
+    public HouseJPanel(JPanel displayJPanel, model.AppSystem system, Community community) {
         initComponents();
+        this.displayJPanel=displayJPanel;
+        this.system=system;
+        this.community= community;
+        populateHouses();
+
     }
 
+    
+    public void populateHouses() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblHouse.getModel();
+        model.setRowCount(0);
+        
+        if(community.getHouses()!=null) {
+            for(House house:community.getHouses()){
+                Object[] row = new Object[1];
+                row[0] = house;
+//                row[1] = formatDate(house.getCreatedDate());
+//                row[2] = formatDate(house.getLastUpdatedDate());
+//                row[3] = house.getCreatedBy();
+
+                model.addRow(row);
+            }
+        }
+    }
+
+    private String formatDate(Date date){
+       
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,15 +73,17 @@ public class HouseJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnDelete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHouse = new javax.swing.JTable();
+        btnView = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        txtHouseName = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
+        lblCommunityName = new javax.swing.JLabel();
         btnNext = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
-
-        btnDelete.setText("Delete");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("House Info Center");
@@ -60,11 +109,49 @@ public class HouseJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblHouse);
 
-        btnNext.setText("Next");
-
-        btnBack.setText("Back");
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        lblCommunityName.setText("House Name:");
+
+        btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,17 +163,32 @@ public class HouseJPanel extends javax.swing.JPanel {
                 .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBack))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addGap(130, 130, 130)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblCommunityName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtHouseName, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnView)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNext))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnUpdate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,15 +197,128 @@ public class HouseJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
                     .addComponent(btnNext)
+                    .addComponent(btnBack)
+                    .addComponent(btnAdd)
                     .addComponent(btnDelete)
-                    .addComponent(btnAdd))
-                .addGap(159, 159, 159))
+                    .addComponent(btnView))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtHouseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate)
+                    .addComponent(lblCommunityName))
+                .addGap(88, 88, 88))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        int selectedHouse = tblHouse.getSelectedRow();
+        if(selectedHouse < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a Community to update");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblHouse.getModel();
+        House house = (House) model.getValueAt(selectedHouse, 0);
+
+        txtHouseName.setText(house.getHouseName());
+        //        viewCityJPanel viCityJPanel = new viewCityJPanel(displayJPanel,system,city);
+        //        displayJPanel.add("ViewCityPanel", viCityJPanel);
+        //        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        //        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        AddHouseJPanel addHouseJPanel = new AddHouseJPanel(displayJPanel, system, community);
+        displayJPanel.add("AddHousePanel",addHouseJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblHouse.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please Select any Community to delete");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblHouse.getModel();
+        House house  = (House) model.getValueAt(selectedRow, 0);
+        community.getHouses().remove(house);
+//        community.setLastUpdatedDate(new Date());
+        system.getPersonDirectory().getPersons().removeAll(house.getPatDir().getPatients());
+//        system.getPersonDirectory().setLastUpdatedDate(new Date());
+        
+        List<Patient> patientsToRemove = new ArrayList<>();
+        if(house.getPatDir().getPatients()!=null) {
+            for(Patient patient:house.getPatDir().getPatients()){
+                patientsToRemove.add(patient);
+            }
+        }
+        
+        system.getPatientDirectory().getPatients().removeAll(patientsToRemove);
+//        system.getPatientDirectory().setLastUpdatedDate(new Date());
+        JOptionPane.showMessageDialog(this, "Successfully deleted the House");
+        populateHouses();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:     
+        
+        if(txtHouseName.getText().matches("^[a-zA-Z ]+$")) {
+            
+            int selectedHouse = tblHouse.getSelectedRow();
+
+            DefaultTableModel model = (DefaultTableModel) tblHouse.getModel();
+            House house = (House) model.getValueAt(selectedHouse, 0);
+            
+            house.setHouseName(txtHouseName.getText());
+//            house.setLastUpdatedDate(new Date());
+            JOptionPane.showMessageDialog(this, "Successfully Saved");
+            txtHouseName.setText("");
+        }else {
+            JOptionPane.showMessageDialog(this, "Not Saved. Please check DataType");
+        }
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblHouse.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please Select any House to View the peoples");
+            return;
+        }
+
+        showPersonsInCommunity(selectedRow);
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void showPersonsInCommunity(int selectedRow) {
+        
+        DefaultTableModel model = (DefaultTableModel) tblHouse.getModel();
+        House house = (House) model.getValueAt(selectedRow, 0);
+        navigateToPatients(house);
+    }
+    
+    private void navigateToPatients(House house) {
+        
+        ViewPersonsJPanel patientJPanel = new ViewPersonsJPanel(displayJPanel,system,house);
+        displayJPanel.add("PatientsInformation", patientJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }
+    
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        CardLayout cardLayout =  (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -111,8 +326,12 @@ public class HouseJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnView;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCommunityName;
     private javax.swing.JTable tblHouse;
+    private javax.swing.JTextField txtHouseName;
     // End of variables declaration//GEN-END:variables
 }

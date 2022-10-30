@@ -4,6 +4,16 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Doctor;
+import model.Hospital;
+import model.House;
+import model.Patient;
+import model.Person;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,8 +23,36 @@ public class DoctorJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorJPanel
      */
-    public DoctorJPanel() {
+    private JPanel displayJPanel;
+    private model.AppSystem system;
+    private Hospital hospital;
+    
+    public DoctorJPanel(JPanel displayJPanel,model.AppSystem system, Hospital hospital) {
         initComponents();
+        this.displayJPanel=displayJPanel;
+        this.system=system;
+        this.hospital=hospital;
+        populateTable();
+        
+    }
+    
+    public void populateTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblDoctor.getModel();
+        model.setRowCount(0);
+        if(hospital.getDocDir().getDoctors()!=null){
+            for(Doctor doctor:hospital.getDocDir().getDoctors()){
+                Object[] row = new Object[6];
+                row[0]=doctor;
+                row[2]=doctor.getAge();
+                row[1]=doctor.getGender().name();
+//                row[3]=formatDate(person.getCreatedDate());
+//                row[4]=formatDate(person.getLastUpdatedDate());
+//                row[5]=person.getCreatedBy();
+
+                model.addRow(row);
+            }
+        }
     }
 
     /**
@@ -35,6 +73,11 @@ public class DoctorJPanel extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Doctor Info Center");
@@ -61,10 +104,25 @@ public class DoctorJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblDoctor);
 
         btnAppointment.setText("Appointment");
+        btnAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAppointmentActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -104,6 +162,46 @@ public class DoctorJPanel extends javax.swing.JPanel {
                 .addGap(159, 159, 159))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        AddDoctorJPanel addDoctorJPanel = new AddDoctorJPanel(displayJPanel, system, hospital);
+        displayJPanel.add("AddPatientPanel", addDoctorJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+        
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = tblDoctor.getSelectedRow();
+        if(selectedIndex < 0){
+            JOptionPane.showMessageDialog(this, "Please select a row to delete doctor");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblDoctor.getModel();
+        Patient patient = (Patient) model.getValueAt(selectedIndex, 0);
+        hospital.getDocDir().getDoctors().remove(patient);
+//        house.setLastUpdatedDate(new Date());
+        system.getDoctorDirectory().getDoctors().remove(patient);
+//        system.getPersonDirectory().setLastUpdatedDate(new Date());
+//        system.getPatientDirectory().getPatients().remove(person.getPatient());
+//        system.getPatientDirectory().setLastUpdatedDate(new Date());
+        populateTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppointmentActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnAppointmentActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

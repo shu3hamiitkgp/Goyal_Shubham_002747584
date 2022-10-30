@@ -4,6 +4,17 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.City;
+import model.CityName;
+import model.Community;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,8 +24,14 @@ public class AddCityJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddCityJPanel
      */
-    public AddCityJPanel() {
+    
+    private model.AppSystem system;
+    private JPanel displayJPanel;
+    
+    public AddCityJPanel(JPanel displayJPanel,model.AppSystem system) {
         initComponents();
+        this.displayJPanel=displayJPanel;
+        this.system=system;
     }
 
     /**
@@ -29,9 +46,9 @@ public class AddCityJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         lblCity = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        ComboBoxCity = new javax.swing.JComboBox<>();
         btnAdd = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        txtCityName = new javax.swing.JTextField();
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("City Info Center");
@@ -40,11 +57,19 @@ public class AddCityJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Add City details below:");
 
-        ComboBoxCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -67,8 +92,8 @@ public class AddCityJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(176, 176, 176)
                         .addComponent(lblCity)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ComboBoxCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -79,9 +104,9 @@ public class AddCityJPanel extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addComponent(jLabel2)
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ComboBoxCity))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
@@ -90,13 +115,44 @@ public class AddCityJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        String citySelected = txtCityName.getText();
+        if(system.getCities()!=null){
+            List<City> cities = system.getCities();
+            for(City city:cities) {
+                if(city.getCityName().equalsIgnoreCase(citySelected)){
+                    JOptionPane.showMessageDialog(this, "City already existed. Please select another");
+                    return;
+                }
+            }
+        }else{
+            system.setCities(new ArrayList<>());
+        }
+        
+        City city = new City(citySelected, null);
+        system.getCities().add(city);
+        JOptionPane.showMessageDialog(this, "Successfully saved City");
+        txtCityName.setText("");
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        Component[] componentArray = displayJPanel.getComponents();
+        CityJPanel cityJPanel = (CityJPanel) componentArray[componentArray.length-1];
+        cityJPanel.initializeCities();
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboBoxCity;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblCity;
+    private javax.swing.JTextField txtCityName;
     // End of variables declaration//GEN-END:variables
 }

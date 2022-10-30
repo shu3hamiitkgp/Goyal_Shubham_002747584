@@ -6,38 +6,53 @@ package ui;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.City;
+import model.Community;
 import model.Doctor;
+import model.DoctorDirectory;
 import model.Gender;
-import model.Hospital;
 import model.House;
 import model.Patient;
+import model.PatientDirectory;
+import model.Person;
+import model.PersonDirectory;
 
 /**
  *
  * @author shubhamgoyal
  */
-public class AddDoctorJPanel extends javax.swing.JPanel {
+public class CreatePersonJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form AddDoctorJPanel
+     * Creates new form CreatePersonJPanel
      */
     private JPanel displayJPanel;
     private model.AppSystem system;
-    private Hospital hospital;
+    private PersonDirectory perDir;
+    private PatientDirectory patDir;
+    private DoctorDirectory docDir;
+//    private DoctorDirectory docDir;
+    private Person person;
+    private Patient patient;
+    private Doctor doctor;
     
-    public AddDoctorJPanel(JPanel displayJPanel, model.AppSystem system, Hospital hospital) {
+    public CreatePersonJPanel(JPanel displayJPanel, model.AppSystem system) {
         initComponents();
-        
         this.displayJPanel = displayJPanel;
         this.system = system;
-        this.hospital = hospital;
-        initComponents();
+        this.perDir= system.getPersonDirectory();
+        this.patDir=system.getPatientDirectory();
+        this.docDir=system.getDoctorDirectory();
         displayStaticData();
+
+//        this.custDir= admin.getCustDir();
+        
     }
     
     private void displayStaticData() {
@@ -45,7 +60,7 @@ public class AddDoctorJPanel extends javax.swing.JPanel {
         String[] genders = Gender.getGenderArray();
         for(String gender:genders){
             ComboBoxGender.addItem(gender);
-        }        
+        }
     }
 
     /**
@@ -58,50 +73,25 @@ public class AddDoctorJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        ComboBoxGender = new javax.swing.JComboBox<>();
-        txtPword = new javax.swing.JTextField();
-        txtAge = new javax.swing.JTextField();
-        txtRePword = new javax.swing.JTextField();
-        lblGender = new javax.swing.JLabel();
-        lblUserID = new javax.swing.JLabel();
-        lblAge = new javax.swing.JLabel();
-        lblPassword = new javax.swing.JLabel();
-        btnBack = new javax.swing.JButton();
-        lblRePassword = new javax.swing.JLabel();
-        lblName = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
         txtUserID = new javax.swing.JTextField();
+        txtPword = new javax.swing.JTextField();
+        txtRePword = new javax.swing.JTextField();
+        lblUserID = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        lblRePassword = new javax.swing.JLabel();
+        ComboBoxRole = new javax.swing.JComboBox<>();
+        lblRole = new javax.swing.JLabel();
+        txtAge = new javax.swing.JTextField();
+        lblGender = new javax.swing.JLabel();
+        lblAge = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        ComboBoxGender = new javax.swing.JComboBox<>();
+        btnBack = new javax.swing.JButton();
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Doctor Info Center");
-
-        txtPword.setToolTipText("Basic Requirement - Atleast 6 digits, one of each upper case letter, lower case letter, digit and special character ($, *, # or &)");
-
-        txtAge.setToolTipText("only numericals");
-
-        txtRePword.setToolTipText("Should match password above");
-
-        lblGender.setText("Gender:");
-
-        lblUserID.setText("UserID:");
-
-        lblAge.setText("Age:");
-
-        lblPassword.setText("Password:");
-
-        btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
-        lblRePassword.setText("Re-enter Password :");
-
-        lblName.setText("Name:");
-
-        txtName.setToolTipText("Only Alphabets");
+        jLabel4.setText("New User Registration");
 
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -112,30 +102,64 @@ public class AddDoctorJPanel extends javax.swing.JPanel {
 
         txtUserID.setToolTipText("User ID should be in format xx@xx.xx");
 
+        txtPword.setToolTipText("Basic Requirement - Atleast 6 digits, one of each upper case letter, lower case letter, digit and special character ($, *, # or &)");
+
+        txtRePword.setToolTipText("Should match password above");
+
+        lblUserID.setText("UserID:");
+
+        lblPassword.setText("Password:");
+
+        lblRePassword.setText("Re-enter Password :");
+
+        ComboBoxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Community Admin", "Hospital Admin", "Patient", "Doctor" }));
+
+        lblRole.setText("Role :");
+
+        txtAge.setToolTipText("only numericals");
+
+        lblGender.setText("Gender:");
+
+        lblAge.setText("Age:");
+
+        lblName.setText("Name:");
+
+        txtName.setToolTipText("Only Alphabets");
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(132, 132, 132)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(88, 88, 88)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblRePassword)
-                                        .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblUserID, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblRePassword)
+                                            .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblUserID, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(lblRole))
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtUserID, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                        .addComponent(txtUserID)
                                         .addComponent(txtPword)
-                                        .addComponent(txtRePword)))
+                                        .addComponent(txtRePword)
+                                        .addComponent(ComboBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -150,17 +174,17 @@ public class AddDoctorJPanel extends javax.swing.JPanel {
                                         .addComponent(txtName)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(ComboBoxGender, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, Short.MAX_VALUE))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                                            .addGap(0, 0, Short.MAX_VALUE))))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblName))
@@ -184,26 +208,23 @@ public class AddDoctorJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRePword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRePassword))
-                .addGap(53, 53, 53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRole))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
                     .addComponent(btnBack))
-                .addGap(41, 41, 41))
+                .addGap(56, 56, 56))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        displayJPanel.remove(this);
-        Component[] componentArray = displayJPanel.getComponents();
-        DoctorJPanel doctorJPanel = (DoctorJPanel) componentArray[componentArray.length-1];
-        doctorJPanel.populateTable();
-        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
-        cardLayout.previous(displayJPanel);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
+        
+        String role = ComboBoxRole.getSelectedItem().toString();
+        
         if(!isNameValid()){
             JOptionPane.showMessageDialog(null, "Name should be only alphabet and not null");
         }
@@ -212,41 +233,88 @@ public class AddDoctorJPanel extends javax.swing.JPanel {
         }
         else if(!userIDValidator()){
             JOptionPane.showMessageDialog(null, "Error: Either user id exits or it is not in format xx@xx.xx");
-            //            txtUserID.setBorder(BorderFactory.createEtchedBorder(Color.RED,RED));
-            //            lblUserID.setForeground(RED);
+//            txtUserID.setBorder(BorderFactory.createEtchedBorder(Color.RED,RED));
+//            lblUserID.setForeground(RED);
         } else if(!passwordValidator()){
             JOptionPane.showMessageDialog(null, "Password should be at least 6 digits and contain at least one upper case letter, one lower case letter, one digit and one special character $, *, # or &.");
-            //            txtPword.setBorder(BorderFactory.createEtchedBorder(Color.RED,RED));
-            //            createPassword.setForeground(RED);
+//            txtPword.setBorder(BorderFactory.createEtchedBorder(Color.RED,RED));
+//            createPassword.setForeground(RED);
         } else if (!txtPword.getText().equals(txtRePword.getText())){
             JOptionPane.showMessageDialog(null, "Password is not matched");
-            //            lblRePassword.setForeground(RED);
+//            lblRePassword.setForeground(RED);
         }else if(userIDValidator() && passwordValidator()){
-            
-            Doctor doctor =  new Doctor(txtName.getText(),Double.valueOf(txtAge.getText()),Gender.valueOf((String)ComboBoxGender.getSelectedItem()),
-                    txtUserID.getText(),txtPword.getText(),new Date(), null,null,null);
-
-                //                perDir.getPersons().add(this.person)
+            if(role.equalsIgnoreCase("Community Admin")){
                 
-                
+                Person person = new Person(txtName.getText(),Double.valueOf(txtAge.getText()),Gender.valueOf((String)ComboBoxGender.getSelectedItem()),
+                        txtUserID.getText(),txtPword.getText(),role,
+                        new Date());
             
-            hospital.getDocDir().getDoctors().add(doctor);
-           
-            system.getDoctorDirectory().getDoctors().add(doctor);
-//            house.setLastUpdatedDate(new Date());
-//            system.getPersonDirectory().setLastUpdatedDate(new Date());
-            JOptionPane.showMessageDialog(this, "Successfully added Doctor");
-            resetUi();
+                perDir.getPersons().add(person);
+                
+                JOptionPane.showMessageDialog(this, "Successfully added Community Admin");
+                resetUi();
 
+            }else if(role.equalsIgnoreCase("Hospital Admin")){
+                
+                Person person = new Person(txtName.getText(),Double.valueOf(txtAge.getText()),Gender.valueOf((String)ComboBoxGender.getSelectedItem()),
+                        txtUserID.getText(),txtPword.getText(),role,
+                        new Date());
+            
+                perDir.getPersons().add(person);
+                
+                JOptionPane.showMessageDialog(this, "Successfully added Hospital Admin");
+                resetUi();
+                
+            }else if(role.equalsIgnoreCase("Patient")){
+                
+//                Person person = new Person(txtName.getText(),Double.valueOf(txtAge.getText()),Gender.valueOf((String)ComboBoxGender.getSelectedItem()),
+//                        txtUserID.getText(),txtPword.getText(),role,
+//                        new Date());
+            
+                Patient patient =  new Patient(txtName.getText(),Double.valueOf(txtAge.getText()),Gender.valueOf((String)ComboBoxGender.getSelectedItem()),
+                        txtUserID.getText(),txtPword.getText(),new Date(), null,null,null,null);
+                
+                this.person=(Person) patient;
+                patDir.getPatients().add(patient);
+//                perDir.getPersons().add(this.person);
+                
+                JOptionPane.showMessageDialog(this, "Successfully added Patient");
+                resetUi();
+                
+            }else if(role.equalsIgnoreCase("Doctor")){
+                
+//                Person person = new Person(txtName.getText(),Double.valueOf(txtAge.getText()),Gender.valueOf((String)ComboBoxGender.getSelectedItem()),
+//                        txtUserID.getText(),txtPword.getText(),role,
+//                        new Date());
+            
+                Doctor doctor =  new Doctor(txtName.getText(),Double.valueOf(txtAge.getText()),Gender.valueOf((String)ComboBoxGender.getSelectedItem()),
+                        txtUserID.getText(),txtPword.getText(),new Date(),null,null,null);
+                
+                this.person=(Person) doctor;
+                docDir.getDoctors().add(doctor);
+//                perDir.getPersons().add(this.person);
+                
+                JOptionPane.showMessageDialog(this, "Successfully added Doctor");
+                resetUi();
+                
+            }
+            
+            else{
+                System.out.println("Please Enter User Name and Password to create user");
+            }
         }
-        else{
-            System.out.println("Please Enter User Name and Password to create user");
-        }
-
-        
     }//GEN-LAST:event_btnCreateActionPerformed
 
-    
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        Component[] componentArray = displayJPanel.getComponents();
+        ViewPersonsJPanel viewPersonJPanel = (ViewPersonsJPanel) componentArray[componentArray.length-1];
+        viewPersonJPanel.populateTable();
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
     public boolean isNameValid() {
         
         if(txtName.getText().isBlank()) {
@@ -284,7 +352,7 @@ public class AddDoctorJPanel extends javax.swing.JPanel {
         if(b==true){
             try {
             
-            if(system.getPersonDirectory().searchUserIDProfile(txtUserID.getText()) != null){
+            if(perDir.searchUserIDProfile(txtUserID.getText()) != null){
                 throw new Exception("Already Exists");
             }
             return true;
@@ -307,9 +375,11 @@ public class AddDoctorJPanel extends javax.swing.JPanel {
         txtPword.setText("");
         txtRePword.setText("");
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxGender;
+    private javax.swing.JComboBox<String> ComboBoxRole;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
     private javax.swing.JLabel jLabel4;
@@ -318,6 +388,7 @@ public class AddDoctorJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblRePassword;
+    private javax.swing.JLabel lblRole;
     private javax.swing.JLabel lblUserID;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtName;

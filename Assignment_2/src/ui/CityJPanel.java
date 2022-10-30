@@ -4,6 +4,20 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.City;
+import model.CityName;
+import model.Community;
+import model.House;
+import model.Patient;
+import model.Person;
+
 /**
  *
  * @author shubhamgoyal
@@ -13,9 +27,34 @@ public class CityJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CityJPanel
      */
-    public CityJPanel() {
+    private JPanel displayJPanel;
+    private model.AppSystem system;
+    
+    public CityJPanel( JPanel displayJPanel, model.AppSystem system) {
+        this.displayJPanel=displayJPanel;
+        this.system=system;
         initComponents();
+        initializeCities();
     }
+    
+    public void initializeCities() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
+        model.setRowCount(0);
+        if(system.getCities()!=null){
+            for(City city:system.getCities()){
+                Object[] row = new Object[2];
+                row[0] = city;
+                row[1] = (new Date());
+//                row[2] = null;
+//                row[3] = null;
+
+                model.addRow(row);
+            }
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,6 +72,10 @@ public class CityJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnView = new javax.swing.JButton();
+        txtCityName = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("City Info Center");
@@ -59,32 +102,82 @@ public class CityJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblCity);
 
         btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
-        btnBack.setText("Back");
+        btnBack.setText("<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("City Name:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNext, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(39, 39, 39))
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                                .addGap(130, 130, 130)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnView)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnNext)
+                                .addGap(39, 39, 39))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnUpdate)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(132, 132, 132)
@@ -101,8 +194,14 @@ public class CityJPanel extends javax.swing.JPanel {
                     .addComponent(btnNext)
                     .addComponent(btnBack)
                     .addComponent(btnAdd)
-                    .addComponent(btnDelete))
-                .addContainerGap(160, Short.MAX_VALUE))
+                    .addComponent(btnDelete)
+                    .addComponent(btnView))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate)
+                    .addComponent(jLabel1))
+                .addContainerGap(83, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(14, 14, 14)
@@ -111,14 +210,145 @@ public class CityJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        AddCityJPanel addCityJPanel = new AddCityJPanel(displayJPanel,system);
+        displayJPanel.add("AddCityPanel", addCityJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedCity = tblCity.getSelectedRow();
+        if(selectedCity < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a City to delete");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
+        City city = (City) model.getValueAt(selectedCity, 0);
+        system.getCities().remove(city);
+//        system.setLastUpdatedDate(new Date());
+        
+        List<Person> persons = new ArrayList<>();
+        List<Patient> patients  = new ArrayList<>();
+        List<Community> communities = city.getCommunities();
+        List<House> houses = new ArrayList<>();
+        if(communities!=null){
+            for(Community community:communities){
+                houses.addAll(community.getHouses());
+            }
+        }
+        
+        for(House house:houses){
+            patients.addAll(house.getPatDir().getPatients());
+        }
+        
+//        system.getPersonDirectory().getPersons().removeAll(patie);
+//        system.getPersonDirectory().setLastUpdatedDate(new Date());
+        system.getPatientDirectory().getPatients().removeAll(patients);
+//        system.getPatientDirectory().setLastUpdatedDate(new Date());
+        JOptionPane.showMessageDialog(this, "Successfully Deleted the City");
+//        initializeCities();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        int selectedCity = tblCity.getSelectedRow();
+        if(selectedCity < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a City to delete");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
+        City city = (City) model.getValueAt(selectedCity, 0);
+        
+        CommunityJPanel communityJPanel = new CommunityJPanel(displayJPanel, system, city);
+        displayJPanel.add("CommunityPanel", communityJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        int selectedCity = tblCity.getSelectedRow();
+        if(selectedCity < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a City to update");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
+        City city = (City) model.getValueAt(selectedCity, 0);
+
+        txtCityName.setText(city.getCityName());
+//        viewCityJPanel viCityJPanel = new viewCityJPanel(displayJPanel,system,city);
+//        displayJPanel.add("ViewCityPanel", viCityJPanel);
+//        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+//        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        String citySelected = (String) txtCityName.getText();
+//        if(city.getCityName().name().equalsIgnoreCase(citySelected)){
+//            return;
+//        }
+        
+        List<City> cities = system.getCities();
+        for(City citys:cities) {
+            if(citys.getCityName().equalsIgnoreCase(citySelected)){
+                JOptionPane.showMessageDialog(this, "City already existed. Please select another");
+                return;
+            }
+        }
+        
+        
+//        city.setLastUpdatedDate(new Date());
+//        JOptionPane.showMessageDialog(this, "Successfully Updated City");
+        
+        if(isCityNameValid()){
+            int selectedCity = tblCity.getSelectedRow();
+        
+            DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
+            City city = (City) model.getValueAt(selectedCity, 0);
+        
+            city.setCityName(citySelected);
+            JOptionPane.showMessageDialog(this, "City Updated Successfully");
+        }else{
+            JOptionPane.showMessageDialog(this, "Error Updating City");
+        }  
+        
+        txtCityName.setText("");
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    public boolean isCityNameValid() {
+        
+        if(txtCityName.getText().isBlank()) {
+            return false;
+        }
+        return txtCityName.getText().matches("^[a-zA-Z\\s]*$");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnView;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCity;
+    private javax.swing.JTextField txtCityName;
     // End of variables declaration//GEN-END:variables
 }
