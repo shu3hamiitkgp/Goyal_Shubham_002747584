@@ -118,7 +118,8 @@ public class AddCityJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         String citySelected = txtCityName.getText();
-        if(system.getCities()!=null){
+        if(citySelected.matches("^[a-zA-Z ]+$")){
+           if(system.getCities()!=null){
             List<City> cities = system.getCities();
             for(City city:cities) {
                 if(city.getCityName().equalsIgnoreCase(citySelected)){
@@ -133,9 +134,15 @@ public class AddCityJPanel extends javax.swing.JPanel {
         City city = new City(citySelected, null);
         system.getCities().add(city);
         JOptionPane.showMessageDialog(this, "Successfully saved City");
-        txtCityName.setText("");
+        txtCityName.setText(""); 
+        }else{
+            JOptionPane.showMessageDialog(this, "Not Saved. Please check the proper Type");
+        }
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
+   
+        
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         displayJPanel.remove(this);
