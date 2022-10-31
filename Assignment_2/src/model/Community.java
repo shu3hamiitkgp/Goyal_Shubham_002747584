@@ -66,11 +66,6 @@ public class Community {
     public void setHospDir(HospitalDirectory hospDir) {
         this.hospDir = hospDir;
     }
-    
-    @Override
-    public String toString() {
-        return communityName;
-    }
 
       
 }
