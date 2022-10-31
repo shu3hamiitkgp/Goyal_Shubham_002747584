@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author shubhamgoyal
  */
-public class VitalSigns extends ModifInfo{
+public class VitalSigns {
     
     private double weight;
     
@@ -28,8 +28,8 @@ public class VitalSigns extends ModifInfo{
     
     private double oxygenSaturation;
 
-    public VitalSigns(double weight, double uprBloodPressure, double lowBloodPressure, double height, double Temperate, int pulseRate, int respirationRate, double oxygenSaturation, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public VitalSigns(double weight, double uprBloodPressure, double lowBloodPressure, double height, double Temperate, int pulseRate, int respirationRate, double oxygenSaturation) {
+        
         this.weight = weight;
         this.uprBloodPressure = uprBloodPressure;
         this.lowBloodPressure = lowBloodPressure;

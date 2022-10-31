@@ -272,7 +272,7 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
 //                        new Date());
             
                 Patient patient =  new Patient(txtName.getText(),Double.valueOf(txtAge.getText()),Gender.valueOf((String)ComboBoxGender.getSelectedItem()),
-                        txtUserID.getText(),txtPword.getText(),new Date(), null,null,null,null);
+                        txtUserID.getText(),txtPword.getText(),new Date(),null);
                 
                 this.person=(Person) patient;
                 patDir.getPatients().add(patient);

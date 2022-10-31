@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.EncounterHistory;
 import model.Gender;
 import model.House;
 import model.Patient;
@@ -225,8 +226,10 @@ public class AddPatientJPanel extends javax.swing.JPanel {
             //            lblRePassword.setForeground(RED);
         }else if(userIDValidator() && passwordValidator()){
             
+            EncounterHistory encounterhistory= new EncounterHistory();
+            
             Patient patient =  new Patient(txtName.getText(),Double.valueOf(txtAge.getText()),Gender.valueOf((String)ComboBoxGender.getSelectedItem()),
-                    txtUserID.getText(),txtPword.getText(),new Date(), null,null,null,null);
+                    txtUserID.getText(),txtPword.getText(),new Date(), encounterhistory);
 
                 //                perDir.getPersons().add(this.person)
                 

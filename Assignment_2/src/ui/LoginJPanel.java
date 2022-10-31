@@ -7,6 +7,7 @@ package ui;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Patient;
 
 /**
  *
@@ -20,12 +21,14 @@ public class LoginJPanel extends javax.swing.JPanel {
     
     private model.AppSystem system;
     private JPanel displayJPanel;
+    private Patient patient;
 
     public LoginJPanel(JPanel displayJPanel,model.AppSystem system) {
         
         initComponents();
         this.displayJPanel=displayJPanel;
         this.system=system;
+        this.patient=patient;
 //        this.system=system;
     }
 
@@ -38,7 +41,6 @@ public class LoginJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnNewUser = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
         txtPassword = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
@@ -47,13 +49,6 @@ public class LoginJPanel extends javax.swing.JPanel {
         ComboBoxRole = new javax.swing.JComboBox<>();
         lblRole = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-
-        btnNewUser.setText("New User?");
-        btnNewUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewUserActionPerformed(evt);
-            }
-        });
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -95,8 +90,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                                     .addComponent(txtPassword)
                                     .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(btnSubmit))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNewUser))
+                        .addGap(100, 100, 100))
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(141, Short.MAX_VALUE))
         );
@@ -118,16 +112,10 @@ public class LoginJPanel extends javax.swing.JPanel {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSubmit)
-                    .addComponent(btnNewUser))
+                .addComponent(btnSubmit)
                 .addContainerGap(108, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewUserActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
@@ -151,39 +139,66 @@ public class LoginJPanel extends javax.swing.JPanel {
                         CardLayout layout = (CardLayout) displayJPanel.getLayout();
                         layout.next(displayJPanel);
                         
-//                        systemJPanel sysJPanel = new systemJPanel(displayJPanel, system);
-//                         displayJPanel.add("CitiesInformation",sysJPanel);
-//                        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
-//                        cardLayout.next(displayJPanel);
 
-                        //                    displayJPanel.add(sysJPanel);
-                        //                    CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
-                        //                    cardLayout.next(displayJPanel);
-
-                        //                    ViewJPanel viewPanel = new ViewJPanel(history);
-                        //                    SplitPanel.setRightComponent(viewPanel);
-                        //
-                        //                    CardLayout layout = (CardLayout)panelRight.getLayout();
-                        //                    panelRight.add(new AdminMainScreen(panelRight, (Admin)adminUser));
-                        //                    layout.next(panelRight);
 
                     }else{
                         JOptionPane.showMessageDialog(null, "Password is not correct");
                     }
-                }
-                //                else if (role.equalsIgnoreCase("Patient")){
+                }else if (role.equals("Community Admin")){
+                    if(userID.equals("cadmin@gmail.com") && password.equals("cadmin$CA123")){
 
-                    //                    String userID = txtUserID.getText();
-                    //                    this.person = list.stream().filter(a -> a.getUserID().equals(txtUserID.getText()))
-                    //                            .findFirst().get();
-                    //                    if(person.getPassword().equals(txtPassword.getText())){
-                        //                        PatientJPanel patJPanel = new PatientJPanel(displayJPanel, system);
-                        //                        displayJPanel.add("PatientInformation",patJPanel);
-                        //                        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
-                        //                        cardLayout.next(displayJPanel);
-                        //                    }else{
-                        //                        JOptionPane.showMessageDialog(null, "Password is not correct");
-                        //                    }
+                        CityJPanel cityJPanel = new CityJPanel(displayJPanel,system);
+                        //                    SplitPanel.setRightComponent(sysJPanel);
+
+                        displayJPanel.add("CityInfo",cityJPanel);
+                        CardLayout layout = (CardLayout) displayJPanel.getLayout();
+                        layout.next(displayJPanel);
+                       
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Password is not correct");
+                    }
+                }else if (role.equals("Hospital Admin")){
+                    if(userID.equals("hadmin@gmail.com") && password.equals("hadmin$HA123")){
+
+                        HospitalJPanel hospitalJPanel = new HospitalJPanel(displayJPanel,system,system.getCities().get(0).getCommunities().get(0));
+                        //                    SplitPanel.setRightComponent(sysJPanel);
+
+                        displayJPanel.add("HospitalInfo",hospitalJPanel);
+                        CardLayout layout = (CardLayout) displayJPanel.getLayout();
+                        layout.next(displayJPanel);
+                       
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Password is not correct");
+                    }
+                }else if (role.equals("Patient")){
+                    if(userID.equals("patient@gmail.com") && password.equals("patient$PA123")){
+
+                        CommunityJPanel communityJPanel = new CommunityJPanel(displayJPanel,system, system.getCities().get(0));
+                        //                    SplitPanel.setRightComponent(sysJPanel);
+
+                        displayJPanel.add("CityInfo",communityJPanel);
+                        CardLayout layout = (CardLayout) displayJPanel.getLayout();
+                        layout.next(displayJPanel);
+                       
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Password is not correct");
+                    }
+                }  else if (role.equals("Doctor")){
+                    if(userID.equals("doctor@gmail.com") && password.equals("doctor$DA123")){
+
+                        ViewPersonsJPanel viewPersonJPanel = new ViewPersonsJPanel(displayJPanel,system,system.getCities().get(0).getCommunities().get(0).getHouses().get(0));
+                        //                    SplitPanel.setRightComponent(sysJPanel);
+
+                        displayJPanel.add("PatientInfo",viewPersonJPanel);
+                        CardLayout layout = (CardLayout) displayJPanel.getLayout();
+                        layout.next(displayJPanel);
+                       
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Password is not correct");
+                    }
+                }  
+            
+               
                 }catch(Exception ex){
                     System.out.println(""+ex);
                 }
@@ -193,7 +208,6 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxRole;
-    private javax.swing.JButton btnNewUser;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblPassword;

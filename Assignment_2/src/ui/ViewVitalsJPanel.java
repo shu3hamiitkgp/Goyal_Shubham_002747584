@@ -6,36 +6,46 @@ package ui;
 
 import java.awt.CardLayout;
 import java.awt.Component;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.Encounter;
-import model.EncounterHistory;
-import model.Patient;
 import model.VitalSigns;
 
 /**
  *
  * @author shubhamgoyal
  */
-public class VitalSignJPanel extends javax.swing.JPanel {
+public class ViewVitalsJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form VitalSignJPanel
+     * Creates new form ViewVitalsJPanel
      */
     private JPanel displayJPanel;
     private model.AppSystem system;
-    private Patient patient;
+    private VitalSigns vitalSigns;
     
-    public VitalSignJPanel(JPanel displayJPanel,model.AppSystem system,Patient patient) {
-        initComponents();
+    public ViewVitalsJPanel(JPanel displayJPanel, model.AppSystem system, VitalSigns vitalSigns) {
+        
         this.displayJPanel=displayJPanel;
         this.system=system;
-        this.patient=patient;
+        this.vitalSigns=vitalSigns;
+        initComponents();
+        displayData(vitalSigns);
     }
 
+    private void displayData(VitalSigns vitalSigns){
+        
+        weightJTextField.setText(String.valueOf(vitalSigns.getWeight()));
+        bloodPressureSysJTextField.setText(String.valueOf(vitalSigns.getUprBloodPressure()));
+        bloodPressureDsJTextField.setText(String.valueOf(vitalSigns.getLowBloodPressure()));
+        heightJTextField.setText(String.valueOf(vitalSigns.getHeight()));
+        bodyTemperatureJTextField.setText(String.valueOf(vitalSigns.getTemperate()));
+        pulseRateJTextField.setText(String.valueOf(vitalSigns.getPulseRate()));
+        respirationRateJTextField.setText(String.valueOf(vitalSigns.getRespirationRate()));
+        oxygenSaturationJTextField.setText(String.valueOf(vitalSigns.getOxygenSaturation()));
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,15 +55,6 @@ public class VitalSignJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
-        btnSubmit = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        pulseRateJTextField = new javax.swing.JTextField();
-        bloodPressureDsJTextField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         bloodPressureSysJTextField = new javax.swing.JTextField();
         oxygenSaturationJTextField = new javax.swing.JTextField();
@@ -63,15 +64,32 @@ public class VitalSignJPanel extends javax.swing.JPanel {
         respirationRateJTextField = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         heightJTextField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        pulseRateJTextField = new javax.swing.JTextField();
         bodyTemperatureJTextField = new javax.swing.JTextField();
+        bloodPressureDsJTextField = new javax.swing.JTextField();
+
+        jLabel13.setText("SpO2:");
+
+        jLabel9.setText("Height:");
+
+        jLabel10.setText("Temperature:");
+
+        jLabel15.setText("Respiration Rate:");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Vital Sign Info Center");
 
-        btnSubmit.setText("Submit");
-        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
@@ -90,14 +108,6 @@ public class VitalSignJPanel extends javax.swing.JPanel {
 
         jLabel8.setText("Blood Pressure(L):");
 
-        jLabel13.setText("SpO2:");
-
-        jLabel9.setText("Height:");
-
-        jLabel10.setText("Temperature:");
-
-        jLabel15.setText("Respiration Rate:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,7 +120,7 @@ public class VitalSignJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(411, 411, 411)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
@@ -157,7 +167,7 @@ public class VitalSignJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -196,36 +206,27 @@ public class VitalSignJPanel extends javax.swing.JPanel {
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnSubmit))
+                    .addComponent(btnUpdate))
                 .addGap(159, 159, 159))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        if(isDataValid()){
-            VitalSigns vitalSigns = new VitalSigns(Double.valueOf(weightJTextField.getText()), Double.valueOf(bloodPressureSysJTextField.getText()),
-            Double.valueOf(bloodPressureDsJTextField.getText()),        
-            Double.valueOf(heightJTextField.getText()), Double.valueOf(bodyTemperatureJTextField.getText()), Integer.valueOf(pulseRateJTextField.getText()),
-            Integer.valueOf(respirationRateJTextField.getText()), Double.valueOf(oxygenSaturationJTextField.getText()));
+        if(isDataValid()) {
+            vitalSigns.setUprBloodPressure(Double.valueOf(bloodPressureSysJTextField.getText()));
+            vitalSigns.setLowBloodPressure(Double.valueOf(bloodPressureDsJTextField.getText()));
+            vitalSigns.setTemperate(Double.valueOf(bodyTemperatureJTextField.getText()));
+            vitalSigns.setHeight(Double.valueOf(heightJTextField.getText()));
+            vitalSigns.setOxygenSaturation(Double.valueOf(oxygenSaturationJTextField.getText()));
+            vitalSigns.setPulseRate(Integer.valueOf(pulseRateJTextField.getText()));
+            vitalSigns.setRespirationRate(Integer.valueOf(respirationRateJTextField.getText()));
+            vitalSigns.setWeight(Double.valueOf(weightJTextField.getText()));
+//            vitalSigns.setLastUpdatedDate(new Date());
 
-            Encounter encounter = new Encounter(vitalSigns);
-
-//            if(patient==null){
-//                List<Encounter> encounters = new ArrayList<>();
-//                encounters.add(encounter);
-//                EncounterHistory encounterHistory = new EncounterHistory(encounters);
-//                Patient patient = new Patient(encounterHistory,);
-//                person.setPatient(patient);
-//            }else{
-            EncounterHistory encounterHistory = patient.getEncounterHistory();
-            encounterHistory.getEncounters().add(encounter);
-//            }
-
-            JOptionPane.showMessageDialog(this, "Successfully Added the Vital Signs");
-            resetData();
+            JOptionPane.showMessageDialog(this, "Successfully updated the Vital Signs");
         }
-    }//GEN-LAST:event_btnSubmitActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private boolean isDataValid() {
         
@@ -324,16 +325,17 @@ public class VitalSignJPanel extends javax.swing.JPanel {
         
     }
     
-    private void resetData() {
+    private void resetData(){
         
-        weightJTextField.setText("");
         bloodPressureSysJTextField.setText("");
         bloodPressureDsJTextField.setText("");
-        heightJTextField.setText("");
         bodyTemperatureJTextField.setText("");
+        heightJTextField.setText("");
+        oxygenSaturationJTextField.setText("");
         pulseRateJTextField.setText("");
         respirationRateJTextField.setText("");
-        oxygenSaturationJTextField.setText("");
+        weightJTextField.setText("");
+        
     }
     
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -341,8 +343,8 @@ public class VitalSignJPanel extends javax.swing.JPanel {
         displayJPanel.remove(this);
         Component[] componentArray = displayJPanel.getComponents();
         Component component = componentArray[componentArray.length-1];
-        PatientJPanel patientJPanel = (PatientJPanel) component;
-        patientJPanel.populateTable();
+        PatientJPanel encounterHistoryJPanel = (PatientJPanel) component;
+        encounterHistoryJPanel.populateTable();
         CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
         cardLayout.previous(displayJPanel);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -353,7 +355,7 @@ public class VitalSignJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField bloodPressureSysJTextField;
     private javax.swing.JTextField bodyTemperatureJTextField;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField heightJTextField;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -62,7 +62,6 @@ public class MainJFrame extends javax.swing.JFrame {
         displayJPanel = new javax.swing.JPanel();
         ControlJPanel = new javax.swing.JPanel();
         btnLogin = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,17 +75,13 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Track");
-
         javax.swing.GroupLayout ControlJPanelLayout = new javax.swing.GroupLayout(ControlJPanel);
         ControlJPanel.setLayout(ControlJPanelLayout);
         ControlJPanelLayout.setHorizontalGroup(
             ControlJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ControlJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ControlJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogin)
-                    .addComponent(jButton2))
+                .addComponent(btnLogin)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         ControlJPanelLayout.setVerticalGroup(
@@ -94,9 +89,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(ControlJPanelLayout.createSequentialGroup()
                 .addGap(109, 109, 109)
                 .addComponent(btnLogin)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         SplitPanel.setLeftComponent(ControlJPanel);
@@ -163,6 +156,5 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JSplitPane SplitPanel;
     private javax.swing.JButton btnLogin;
     private javax.swing.JPanel displayJPanel;
-    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }
